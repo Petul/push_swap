@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 15:42:06 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/25 10:28:04 by pleander         ###   ########.fr       */
+/*   Created: 2024/06/25 11:01:02 by pleander          #+#    #+#             */
+/*   Updated: 2024/06/25 11:03:13 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft/include/libft.h"
 
-/* Takes list of numbers separated by space and returns a stack */
-// static t_stack* create_stack(char *argv)
-// {
-// 	int i;
-//
-// 	i = 0;
-// 		
-// }
+/* Checks if the str is composed of only digits and spaces*/
+int str_is_digit_and_space(char *str)
+ {
+ 	if (!str)
+ 		return (0);
+ 	while (*str)
+ 	{
+ 		if (!ft_isdigit(*str) && *str != ' ')
+ 			return (0);
+ 		str++;
+ 	}
+ 	return (1);
+ }
+

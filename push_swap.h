@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:43:42 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/24 15:24:44 by pleander         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:52:18 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_stack
 	size_t len;
 
 }	t_stack;
+
+int	*parse_args(int *nums, int ac, char **av);
+int str_is_digit_and_space(char *str);
 
 #endif
 
