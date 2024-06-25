@@ -1,2 +1,5 @@
 libft/.git
 libft/.gitignore
+*.o
+*.swp
+*.swo
