@@ -3,3 +3,4 @@ libft/.gitignore
 *.o
 *.swp
 *.swo
+*.a
