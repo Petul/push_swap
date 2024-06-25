@@ -12,25 +12,9 @@
 
 #include <stdlib.h>
 #include "libft/include/ft_printf.h"
+#include "libft/include/libft.h"
 #include "push_swap.h"
 
-static t_stack* create_stack(int ac, char **av)
-{
-	int	*i_arr;
-	int	nums;
-	t_stack *stack;
-
-	i_arr = parse_args(&nums, ac, av);
-	if (nums < 0)
-		return (NULL);
-	stack = malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
-	stack->arr = i_arr;
-	stack->len = nums;
-	stack->start = 0;
-	return (stack);
-}
 
 static	int check_args(int ac, char **av)
 {
@@ -54,24 +38,47 @@ static void error_exit(void)
 	exit(1);
 }
 
+static t_stack	*create_stack_a(int ac, char **av)
+{
+	int		n_nums;
+	int		*num_array;
+	t_stack *stack_a;
+
+	num_array = parse_args(&n_nums, ac, av);
+	if (n_nums < 0)
+		return (NULL);
+	stack_a = create_stack(n_nums, n_nums, num_array);
+	if (!stack_a)
+		return (NULL);
+	return (stack_a);
+}
+
+static t_stack *crete_stack_b(int n_nums)
+{
+	int		*num_array;
+	t_stack *stack_b;
+
+	num_array = ft_calloc(n_nums, sizeof(int));
+	if (!num_array)
+		return (NULL);
+	stack_b = create_stack(n_nums, 0, num_array);
+	if (!stack_b)
+		return (NULL);
+	return (stack_b);
+}
+
 int main(int argc, char **argv)
 {
-	t_stack *stack;
+	t_stack *stack_a;
+	t_stack *stack_b;
 
 	if (argc < 2 || !check_args(argc, argv))
 		error_exit();
-	stack = create_stack(argc - 1, &argv[1]);
-	if (!stack)
+	stack_a = create_stack_a(argc - 1, &argv[1]);
+	if (!stack_a)
 		error_exit();
-	int i = 0;
-	while (i < (int)stack->len)
-	{
-		ft_printf("%d ", stack->arr[i]);
-		i++;
-	}
-	free(stack->arr);
-	free(stack);
-	return (1);
+	stack_b = crete_stack_b(stack_a->len);
+	return (0);
 }
 
 

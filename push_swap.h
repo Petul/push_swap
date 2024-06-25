@@ -18,14 +18,21 @@
 typedef struct s_stack
 {
 	int *arr;
-	size_t start;
+	size_t size;
 	size_t len;
 
 }	t_stack;
 
-int		*parse_args(int *nums, int ac, char **av);
-int		str_is_digit_and_space(char *str);
-void	free_array(void **arr);
+int			*parse_args(int *nums, int ac, char **av);
+int			str_is_digit_and_space(char *str);
+void		free_array(void **arr);
+t_stack		*create_stack(size_t size, size_t len, int *num_array);
+void		delete_stack(t_stack *stack);
+void		print_stack(t_stack *stack);
+void		stack_swap(t_stack *stack);
+void		stack_push(t_stack *target, t_stack *source);
+void		stack_rot(t_stack *stack);
+void		stack_rev_rot(t_stack *stack);
 
 #endif
 
