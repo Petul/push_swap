@@ -29,6 +29,7 @@ void	free_array(void **arr)
 	free(arr);
 	return ;
 }
+
 /* Checks if the str is composed of only digits and spaces*/
 int	str_is_digit_and_space(char *str)
  {
