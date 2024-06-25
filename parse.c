@@ -6,28 +6,14 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 09:41:05 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/25 11:59:40 by pleander         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:37:04 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/include/ft_printf.h"
 #include "libft/include/libft.h"
-
-/* Checks if the str is a digit */
-// static int str_is_digit(char *str)
-// {
-// 	if (!str)
-// 		return (0);
-// 	while (*str)
-// 	{
-// 		if (!ft_isdigit(*str))
-// 			return (0);
-// 		str++;
-// 	}
-// 	return (1);
-// }
-
+#include "push_swap.h"
 
 static char *join_args(int ac, char **av)
 {
@@ -100,7 +86,7 @@ static int *char_arr_to_int_arr(int *nums, char *c_arr)
 		i_arr[i] = ft_atoi(s_arr[i]);
 		i++;
 	}
-	free(s_arr);
+	free_array((void **)s_arr);
 	return (i_arr);
 }
 
@@ -113,5 +99,6 @@ int	*parse_args(int *nums, int ac, char **av)
 	if (!arr)
 		return (NULL);
 	i_arr = char_arr_to_int_arr(nums, arr);
+	free(arr);
 	return (i_arr);
 }

@@ -10,12 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft/include/libft.h"
 
+/* Frees a null terminated array */
+void	free_array(void **arr)
+{
+	int i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	return ;
+}
 /* Checks if the str is composed of only digits and spaces*/
-int str_is_digit_and_space(char *str)
+int	str_is_digit_and_space(char *str)
  {
- 	if (!str)
+	if (!str)
  		return (0);
  	while (*str)
  	{

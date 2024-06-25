@@ -69,6 +69,8 @@ int main(int argc, char **argv)
 		ft_printf("%d ", stack->arr[i]);
 		i++;
 	}
+	free(stack->arr);
+	free(stack);
 	return (1);
 }
 

@@ -23,8 +23,9 @@ typedef struct s_stack
 
 }	t_stack;
 
-int	*parse_args(int *nums, int ac, char **av);
-int str_is_digit_and_space(char *str);
+int		*parse_args(int *nums, int ac, char **av);
+int		str_is_digit_and_space(char *str);
+void	free_array(void **arr);
 
 #endif
 
