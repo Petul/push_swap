@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:42:06 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/25 10:28:04 by pleander         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:39:26 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void print_stack(t_stack *stack)
 	}
 	ft_printf("\n");
 }
+
 /* 
 * Swaps first to elements at top of the stack.
 * Do nothing if there is one or less elements 

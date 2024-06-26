@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:01:02 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/25 11:03:13 by pleander         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:24:06 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,18 @@ int	str_is_digit_and_space(char *str)
  	return (1);
  }
 
+int		min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
+int		max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}

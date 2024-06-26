@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:23:18 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/26 10:31:19 by pleander         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:10:03 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ int main(int argc, char **argv)
 	s = create_stacks(argc - 1, &argv[1]);
 	if (!s)
 		error_exit();
+	push_swap(s);
+	ft_printf("Stack A:\n");
+	print_stack(s->a);
+	ft_printf("Stack B:\n");
+	print_stack(s->b);
 	delete_stacks(s);
 	return (0);
 }
