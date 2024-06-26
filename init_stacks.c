@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   init_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 14:23:18 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/25 11:58:56 by pleander         ###   ########.fr       */
+/*   Created: 2024/06/26 10:20:26 by pleander          #+#    #+#             */
+/*   Updated: 2024/06/26 10:30:17 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/ft_printf.h"
 #include "libft/include/libft.h"
 #include "push_swap.h"
-
-
-static	int check_args(int ac, char **av)
-{
-	int	i;
-
-	if (!av)
-		return (0);
-	i = 1;
-	while (i < ac)
-	{
-		if (!str_is_digit_and_space(av[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static void error_exit(void)
-{
-	ft_printf("Error\n");
-	exit(1);
-}
 
 static t_stack	*create_stack_a(int ac, char **av)
 {
@@ -67,18 +43,23 @@ static t_stack *crete_stack_b(int n_nums)
 	return (stack_b);
 }
 
-int main(int argc, char **argv)
+t_stacks *create_stacks(int ac, char **av)
 {
-	t_stack *stack_a;
-	t_stack *stack_b;
-
-	if (argc < 2 || !check_args(argc, argv))
-		error_exit();
-	stack_a = create_stack_a(argc - 1, &argv[1]);
-	if (!stack_a)
-		error_exit();
-	stack_b = crete_stack_b(stack_a->len);
-	return (0);
+	t_stacks *s;
+	
+	s = ft_calloc(1, sizeof(t_stacks));
+	s->a = create_stack_a(ac, av);
+	if (!s->a)
+		return (NULL);
+	s->b = crete_stack_b(s->a->len);
+	if (!s->b)
+			return (NULL);
+	return (s);
 }
 
-
+void	delete_stacks(t_stacks *s)
+{
+	delete_stack(s->a);
+	delete_stack(s->b);
+	free(s);
+}
