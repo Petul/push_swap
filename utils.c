@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:01:02 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 13:46:19 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:57:05 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	str_is_digit_and_space(char *str)
  		return (0);
  	while (*str)
  	{
- 		if (!ft_isdigit(*str) && *str != ' ')
+ 		if (!ft_isdigit(*str) && !ft_strchr(" -", *str))
  			return (0);
  		str++;
  	}
