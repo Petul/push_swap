@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:32:20 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 15:24:39 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:33:44 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,19 +135,12 @@ int	rev_sort_into_b(t_stacks *s, t_list **cmd_list)
 
 	while (s->a->len > 0)
 	{
-		// ft_printf("Stack A:\n");
-		// print_stack(s->a);
-		// ft_printf("Stack B:\n");
-		// print_stack(s->b);
 		min_ix = get_cheapest_index(s);
 		if (min_ix < 0)
 			return (-1);
-		//ft_printf("Trying to push index: %d\n", min_ix);
 		new = get_cheapest_insert(s, min_ix);
 		if (!new)
 			return (-1);
-		//ft_lstiter(*new, &ft_putstr);
-		//ft_putstr("\n");
 		stack_exec_cmds(s, *new);
 		ft_lstadd_back(cmd_list, *new);
 		free(new);
