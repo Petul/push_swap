@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:58:40 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 16:01:08 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:39:17 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	push_swap(t_stacks *s)
 	push_all_to_a(s, cmd_list);
 
 	ft_lstiter(*cmd_list, &ft_puts);
+	ft_printf("%d\n", ft_lstsize(*cmd_list));
 
 	ft_lstclear(cmd_list, &do_nothing);
 	free(cmd_list);

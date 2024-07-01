@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:01:02 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 18:57:05 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:28:10 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,22 @@ void	ft_puts(void *str)
 {
 	ft_printf("%s\n", str);
 	return ;
+}
+
+size_t	get_min_index(size_t *arr, size_t len)
+{
+	size_t	i;
+	size_t	min_i;
+	size_t	min_n;
+
+	min_n = arr[0];
+	min_i = 0;
+	i = 1;
+	while (i < len)
+	{
+		if (arr[i] < min_n)
+			min_i = i;
+		i++;
+	}
+	return (min_i);
 }

@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:23:18 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 16:01:24 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:39:33 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int main(int argc, char **argv)
 		error_exit();
 	if (push_swap(s) < 0)
 		error_exit(); //free stuff
-	// ft_printf("Stack A:\n");
-	// print_stack(s->a);
-	// ft_printf("Stack B:\n");
-	// print_stack(s->b);
+	ft_printf("Stack A:\n");
+	print_stack(s->a);
+	ft_printf("Stack B:\n");
+	print_stack(s->b);
 	delete_stacks(s);
 	return (0);
 }

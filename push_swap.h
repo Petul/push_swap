@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:43:42 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 14:48:56 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:28:24 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		stack_exec_cmds(t_stacks *s, t_list *cmd_lst);
 int			rev_sort_into_b(t_stacks *s, t_list **cmd_list);
 void		ft_puts(void *str);
 t_list		**construct_n_cmd(char *cmd, size_t n);
+size_t	get_min_index(size_t *arr, size_t len);
 
 
 
