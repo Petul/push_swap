@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:43:42 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/26 16:10:28 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:48:56 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,13 @@ void		stack_rev_rot(t_stack *stack);
 void		stack_rev_rot_n(t_stack *s, size_t n);
 void		stack_rot_n(t_stack *s, size_t n);
 void		stack_push_n(t_stack *target, t_stack *source, size_t n);
-int			min(int a, int b);
-int			max(int a, int b);
+void		do_nothing(void *p);
 t_list		**construct_insertion_cmd(size_t *top_dsts);
 void		stack_exec_cmds(t_stacks *s, t_list *cmd_lst);
+int			rev_sort_into_b(t_stacks *s, t_list **cmd_list);
+void		ft_puts(void *str);
+t_list		**construct_n_cmd(char *cmd, size_t n);
+
 
 
 #endif

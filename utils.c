@@ -6,12 +6,13 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:01:02 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/26 15:24:06 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:46:19 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/include/libft.h"
+#include "libft/include/ft_printf.h"
 
 /* Frees a null terminated array */
 void	free_array(void **arr)
@@ -44,18 +45,15 @@ int	str_is_digit_and_space(char *str)
  	return (1);
  }
 
-int		min(int a, int b)
+void	do_nothing(void *p)
 {
-	if (a < b)
-		return (a);
-	else
-		return (b);
+	if (p)
+		return ;
+	return ;
 }
 
-int		max(int a, int b)
+void	ft_puts(void *str)
 {
-	if (a > b)
-		return (a);
-	else
-		return (b);
+	ft_printf("%s\n", str);
+	return ;
 }

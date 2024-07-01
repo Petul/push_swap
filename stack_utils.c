@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:02:36 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/26 16:16:53 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:57:09 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	stack_exec_cmds(t_stacks *s, t_list *cmd_lst)
 			stack_rot(s->a);
 		else if (!ft_strncmp(cmd_lst->content, "rb", 3))
 			stack_rot(s->b);
+		else if (!ft_strncmp(cmd_lst->content, "rrb", 4))
+			stack_rev_rot(s->b);
 		else if (!ft_strncmp(cmd_lst->content, "pb", 3))
 			stack_push(s->b, s->a);
 		else if (!ft_strncmp(cmd_lst->content, "pa", 3))

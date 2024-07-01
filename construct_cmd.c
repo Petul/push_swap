@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:50:03 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/26 15:59:21 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:21:08 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	append_n_cmds(t_list **cmd_list, char *cmd, size_t n)
 			//clear array
 			return (-1);
 		}
-		ft_lstadd_back(cmd_list, ft_lstnew(cmd));
+		ft_lstadd_back(cmd_list, new);
 		i++;
 	}
 	return (1);
@@ -69,5 +69,17 @@ t_list	**construct_insertion_cmd(size_t *top_dsts)
 	t_list **a_cmds;
 
 	a_cmds = construct_rot_rot(top_dsts[0], top_dsts[2]);
+	if (!a_cmds)
+		return (NULL);
 	return (a_cmds);
+}
+
+t_list **construct_n_cmd(char *cmd, size_t n)
+{
+	t_list **cmds;
+
+	cmds = ft_calloc(1, sizeof(t_list *));
+	if (append_n_cmds(cmds, cmd, n) < 0)
+		return (NULL);
+	return (cmds);
 }
