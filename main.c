@@ -52,10 +52,10 @@ int main(int argc, char **argv)
 		error_exit();
 	if (push_swap(s) < 0)
 		error_exit(); //free stuff
-	ft_printf("Stack A:\n");
-	print_stack(s->a);
-	ft_printf("Stack B:\n");
-	print_stack(s->b);
+	// ft_printf("Stack A:\n");
+	// print_stack(s->a);
+	// ft_printf("Stack B:\n");
+	// print_stack(s->b);
 	delete_stacks(s);
 	return (0);
 }

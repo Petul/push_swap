@@ -30,7 +30,7 @@ typedef struct s_stacks
 	t_stack *b;
 }	t_stacks;
 
-enum e_cmd
+typedef enum e_cmd
 {
 	SA,
 	SB,
@@ -43,7 +43,7 @@ enum e_cmd
 	RRA,
 	RRB,
 	RRR
-};
+}	t_cmd;
 
 int			push_swap(t_stacks *s);
 int			*parse_args(int *nums, int ac, char **av);
@@ -66,7 +66,7 @@ t_list		**construct_insertion_cmd(size_t *top_dsts);
 void		stack_exec_cmds(t_stacks *s, t_list *cmd_lst);
 int			rev_sort_into_b(t_stacks *s, t_list **cmd_list);
 void		ft_puts(void *str);
-t_list		**construct_n_cmd(char *cmd, size_t n);
+t_list		**construct_n_cmd(t_cmd cmd, size_t n);
 size_t	get_min_index(size_t *arr, size_t len);
 
 

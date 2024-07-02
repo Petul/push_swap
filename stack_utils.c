@@ -57,15 +57,27 @@ void	stack_exec_cmds(t_stacks *s, t_list *cmd_lst)
 		return ;
 	while (cmd_lst)
 	{
-		if (!ft_strncmp(cmd_lst->content, "ra", 3))
+		if (*(t_cmd *)(cmd_lst->content) == RA)
 			stack_rot(s->a);
-		else if (!ft_strncmp(cmd_lst->content, "rb", 3))
+		else if (*(t_cmd *)(cmd_lst->content) == RRA)
+			stack_rev_rot(s->a);
+		else if (*(t_cmd *)(cmd_lst->content) == RB)
 			stack_rot(s->b);
-		else if (!ft_strncmp(cmd_lst->content, "rrb", 4))
+		else if (*(t_cmd *)(cmd_lst->content) == RRB)
 			stack_rev_rot(s->b);
-		else if (!ft_strncmp(cmd_lst->content, "pb", 3))
+		else if (*(t_cmd *)(cmd_lst->content) == RR)
+		{
+			stack_rot(s->a);
+			stack_rot(s->b);
+		}
+		else if (*(t_cmd *)(cmd_lst->content) == RRR)
+		{
+			stack_rev_rot(s->a);
+			stack_rev_rot(s->b);
+		}
+		else if (*(t_cmd *)(cmd_lst->content) == PB)
 			stack_push(s->b, s->a);
-		else if (!ft_strncmp(cmd_lst->content, "pa", 3))
+		else if (*(t_cmd *)(cmd_lst->content) == PA)
 			stack_push(s->a, s->b);
 		cmd_lst = cmd_lst->next;
 	}

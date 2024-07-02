@@ -14,18 +14,24 @@
 #include "libft/include/libft.h"
 #include "push_swap.h"
 
-static int	append_n_cmds(t_list **cmd_list, char *cmd, size_t n)
+static int	append_n_cmds(t_list **cmd_list, t_cmd cmd, size_t n)
 {
 	size_t	i;
 	t_list *new;
+	t_cmd *cmd_ptr;
 
+	cmd_ptr = ft_calloc(1, sizeof(t_cmd));
+	if (!cmd_ptr)
+		return (-1);
+	*cmd_ptr = cmd;
 	i = 0;
 	while (i < n)
 	{
-		new = ft_lstnew(cmd);
+		new = ft_lstnew(cmd_ptr);
 		if (!new)
 		{
 			//clear array
+			free(cmd_ptr);
 			return (-1);
 		}
 		ft_lstadd_back(cmd_list, new);
@@ -34,6 +40,15 @@ static int	append_n_cmds(t_list **cmd_list, char *cmd, size_t n)
 	return (1);
 }
 
+/* Replaces ra and rb pairs with rr and
+ * rra and rrb pairs with rrr
+ */
+static	size_t min(size_t a, size_t b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
 /* r1 and r2 determine what direction the array is rotated
  * > 0 normal rotation
  * <= reverse rotation
@@ -41,44 +56,87 @@ static int	append_n_cmds(t_list **cmd_list, char *cmd, size_t n)
 static	t_list	**construct_rrp(int r1, int r2, size_t a, size_t b)
 {
 	t_list	**cmd_list;
+	size_t	common_rotations;
 
 	cmd_list = ft_calloc(1, sizeof(t_list *));
 	if (!cmd_list)
 		return (NULL);
-	if (r1 > 0)
+	if (r1 == r2)
 	{
-		if (append_n_cmds(cmd_list, "ra", a) < 0)
+		common_rotations = min(a, b);
+		if (r1 > 0)
 		{
-			//free everything
-			return (NULL);
+			if (append_n_cmds(cmd_list, RR, common_rotations) < 0)
+			{
+				//free stuff
+				return (NULL);
+			}
+			if (append_n_cmds(cmd_list, RA, a - common_rotations) < 0)
+			{
+				//free stuff
+				return (NULL);
+			}
+			if (append_n_cmds(cmd_list, RB, b - common_rotations) < 0)
+			{
+				//free stuff
+				return (NULL);
+			}
+		}
+		else
+		{
+			if (append_n_cmds(cmd_list, RRR, common_rotations) < 0)
+			{
+				//free stuff
+				return (NULL);
+			}
+			if (append_n_cmds(cmd_list, RRA, a - common_rotations) < 0)
+			{
+				//free stuff
+				return (NULL);
+			}
+			if (append_n_cmds(cmd_list, RRB, b - common_rotations) < 0)
+			{
+				//free stuff
+				return (NULL);
+			}
 		}
 	}
 	else
-	{
-		if (append_n_cmds(cmd_list, "rra", a) < 0)
+	{	
+		if (r1 > 0)
 		{
-			//free everything
-			return (NULL);
+			if (append_n_cmds(cmd_list, RA, a) < 0)
+			{
+				//free everything
+				return (NULL);
+			}
+		}
+		else
+		{
+			if (append_n_cmds(cmd_list, RRA, a) < 0)
+			{
+				//free everything
+				return (NULL);
+			}
+		}
+		if (r2 > 0)
+		{
+			if (append_n_cmds(cmd_list, RB, b) < 0)
+			{
+				//free everything
+				return (NULL);
+			}
+		}
+		else
+		{
+			if (append_n_cmds(cmd_list, RRB, b) < 0)
+			{
+				//free everything
+				return (NULL);
+			}
 		}
 	}
-	if (r2 > 0)
-	{
-		if (append_n_cmds(cmd_list, "rb", b) < 0)
-		{
-			//free everything
-			return (NULL);
-		}
-	}
-	else
-	{
-		if (append_n_cmds(cmd_list, "rrb", b) < 0)
-		{
-			//free everything
-			return (NULL);
-		}
-	
-	}
-	if (append_n_cmds(cmd_list, "pb", 1) < 0)
+	if (append_n_cmds(cmd_list, PB, 1) < 0)
 	{
 		//free everything
 		return (NULL);
@@ -125,7 +183,7 @@ t_list	**construct_insertion_cmd(size_t *top_dsts)
 	return (shortest);
 }
 
-t_list **construct_n_cmd(char *cmd, size_t n)
+t_list **construct_n_cmd(t_cmd cmd, size_t n)
 {
 	t_list **cmds;
 

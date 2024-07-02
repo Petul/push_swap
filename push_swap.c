@@ -35,9 +35,9 @@ static int	rotate_b_max_on_top(t_stacks *s, t_list **cmd_list)
 		i++;
 	}
 	if (max_i < s->b->len - max_i)
-		new_cmds = construct_n_cmd("rb", max_i);
+		new_cmds = construct_n_cmd(RB, max_i);
 	else
-		new_cmds = construct_n_cmd("rrb", s->b->len - max_i);
+		new_cmds = construct_n_cmd(RRB, s->b->len - max_i);
 	if (!new_cmds)
 		return (-1);
 	stack_exec_cmds(s, *new_cmds);
@@ -50,7 +50,7 @@ static int	push_all_to_a(t_stacks *s, t_list **cmd_list)
 {
 	t_list **new_cmds;
 
-	new_cmds = construct_n_cmd("pa", s->b->len);
+	new_cmds = construct_n_cmd(RB, s->b->len);
 	if (!new_cmds)
 		return (-1);
 	stack_exec_cmds(s, *new_cmds);
@@ -63,7 +63,7 @@ static int	push_two_to_b(t_stacks *s, t_list **cmd_list)
 {
 	t_list **new_cmds;
 
-	new_cmds = construct_n_cmd("pb", 2);
+	new_cmds = construct_n_cmd(PB, 2);
 	if (!new_cmds)
 		return (-1);
 	stack_exec_cmds(s, *new_cmds);
@@ -90,10 +90,7 @@ int	push_swap(t_stacks *s)
 	rev_sort_into_b(s, cmd_list);
 	rotate_b_max_on_top(s, cmd_list);
 	push_all_to_a(s, cmd_list);
-
 	ft_lstiter(*cmd_list, &ft_puts);
-	ft_printf("%d\n", ft_lstsize(*cmd_list));
-
 	ft_lstclear(cmd_list, &do_nothing);
 	free(cmd_list);
 

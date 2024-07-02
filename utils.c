@@ -70,7 +70,10 @@ size_t	get_min_index(size_t *arr, size_t len)
 	while (i < len)
 	{
 		if (arr[i] < min_n)
+		{
 			min_i = i;
+			min_n = arr[i];
+		}
 		i++;
 	}
 	return (min_i);

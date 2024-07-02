@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h> //
 #include <stdlib.h>
 #include "push_swap.h"
 
@@ -120,7 +121,10 @@ static ssize_t get_cheapest_index(t_stacks *s)
 	{
 		new = get_cheapest_insert(s, i);
 		if (ft_lstsize(*new) < (int)min_lst)
+		{
 			min_ix = i;
+			min_lst = ft_lstsize(*new);
+		}
 		ft_lstclear(new, &do_nothing);
 		free(new);
 		i++;
