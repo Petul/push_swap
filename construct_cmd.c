@@ -12,6 +12,7 @@
 
 #include "stdlib.h"
 #include "libft/include/libft.h"
+#include <stdio.h> //
 #include "push_swap.h"
 
 static int	append_n_cmds(t_list **cmd_list, t_cmd cmd, size_t n)
@@ -19,22 +20,32 @@ static int	append_n_cmds(t_list **cmd_list, t_cmd cmd, size_t n)
 	size_t	i;
 	t_list *new;
 	t_cmd *cmd_ptr;
+	t_list *last;
 
-	cmd_ptr = ft_calloc(1, sizeof(t_cmd));
-	if (!cmd_ptr)
-		return (-1);
-	*cmd_ptr = cmd;
+	last = NULL;
 	i = 0;
 	while (i < n)
 	{
+		cmd_ptr = malloc(sizeof(t_cmd));
+		if (!cmd_ptr)
+			return (-1);
+		*cmd_ptr = cmd;
 		new = ft_lstnew(cmd_ptr);
 		if (!new)
 		{
 			//clear array
-			free(cmd_ptr);
+			//free(cmd_ptr);
 			return (-1);
 		}
-		ft_lstadd_back(cmd_list, new);
+		if (!last)
+		{
+			ft_lstadd_back(cmd_list, new);
+		}
+		else
+		{
+			last->next = new;
+		}
+		last = new;
 		i++;
 	}
 	return (1);
@@ -171,13 +182,11 @@ t_list	**construct_insertion_cmd(size_t *top_dsts)
 	i = 0;
 	while (i < 4)
 	{
-		if (i == min_i)
+		if (i != min_i)
 		{
-			i++;
-			continue ;
+			ft_lstclear(cmds[i], &free);
+			free(cmds[i]);
 		}
-		ft_lstclear(cmds[i], &do_nothing);
-		free(cmds[i]);
 		i++;
 	}
 	return (shortest);
@@ -188,7 +197,12 @@ t_list **construct_n_cmd(t_cmd cmd, size_t n)
 	t_list **cmds;
 
 	cmds = ft_calloc(1, sizeof(t_list *));
-	if (append_n_cmds(cmds, cmd, n) < 0)
+	if (!cmds)
 		return (NULL);
+	if (append_n_cmds(cmds, cmd, n) < 0)
+	{
+		free(cmds);
+		return (NULL);
+	}
 	return (cmds);
 }

@@ -61,13 +61,12 @@ void		stack_rev_rot(t_stack *stack);
 void		stack_rev_rot_n(t_stack *s, size_t n);
 void		stack_rot_n(t_stack *s, size_t n);
 void		stack_push_n(t_stack *target, t_stack *source, size_t n);
-void		do_nothing(void *p);
 t_list		**construct_insertion_cmd(size_t *top_dsts);
 void		stack_exec_cmds(t_stacks *s, t_list *cmd_lst);
 int			rev_sort_into_b(t_stacks *s, t_list **cmd_list);
-void		ft_puts(void *str);
+void		write_cmd(void *content);
 t_list		**construct_n_cmd(t_cmd cmd, size_t n);
-size_t	get_min_index(size_t *arr, size_t len);
+size_t		get_min_index(size_t *arr, size_t len);
 
 
 

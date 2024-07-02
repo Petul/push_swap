@@ -50,7 +50,7 @@ static int	push_all_to_a(t_stacks *s, t_list **cmd_list)
 {
 	t_list **new_cmds;
 
-	new_cmds = construct_n_cmd(RB, s->b->len);
+	new_cmds = construct_n_cmd(PA, s->b->len);
 	if (!new_cmds)
 		return (-1);
 	stack_exec_cmds(s, *new_cmds);
@@ -71,6 +71,7 @@ static int	push_two_to_b(t_stacks *s, t_list **cmd_list)
 	free(new_cmds);
 	return (1);
 }
+
 /*
 *	1)	Push 2 elements from A to B
 *	2)	Push elements one at a time from A to B so that they are in descending
@@ -90,8 +91,8 @@ int	push_swap(t_stacks *s)
 	rev_sort_into_b(s, cmd_list);
 	rotate_b_max_on_top(s, cmd_list);
 	push_all_to_a(s, cmd_list);
-	ft_lstiter(*cmd_list, &ft_puts);
-	ft_lstclear(cmd_list, &do_nothing);
+	ft_lstiter(*cmd_list, &write_cmd);
+	ft_lstclear(cmd_list, &free);
 	free(cmd_list);
 
 	return (1);

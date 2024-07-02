@@ -115,7 +115,7 @@ static ssize_t get_cheapest_index(t_stacks *s)
 		return (-1);
 	min_lst = ft_lstsize(*new);
 	min_ix = i;
-	ft_lstclear(new, &do_nothing);
+	ft_lstclear(new, &free);
 	free(new);
 	while (i < s->a->len)
 	{
@@ -125,7 +125,7 @@ static ssize_t get_cheapest_index(t_stacks *s)
 			min_ix = i;
 			min_lst = ft_lstsize(*new);
 		}
-		ft_lstclear(new, &do_nothing);
+		ft_lstclear(new, &free);
 		free(new);
 		i++;
 	}

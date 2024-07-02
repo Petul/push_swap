@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "libft/include/libft.h"
 #include "libft/include/ft_printf.h"
+#include "push_swap.h"
 
 /* Frees a null terminated array */
 void	free_array(void **arr)
@@ -45,16 +46,33 @@ int	str_is_digit_and_space(char *str)
  	return (1);
  }
 
-void	do_nothing(void *p)
+void	write_cmd(void *content)
 {
-	if (p)
-		return ;
-	return ;
-}
+	t_cmd *c;
 
-void	ft_puts(void *str)
-{
-	ft_printf("%s\n", str);
+	c = (t_cmd *)content;
+	if (*c == SA)
+		ft_printf("sa\n");
+	else if (*c == SB)
+		ft_printf("sb\n");
+	else if (*c == SS)
+		ft_printf("ss\n");
+	else if (*c == PA)
+		ft_printf("pa\n");
+	else if (*c == PB)
+		ft_printf("pb\n");
+	else if (*c == RA)
+		ft_printf("ra\n");
+	else if (*c == RB)
+		ft_printf("rb\n");
+	else if (*c == RR)
+		ft_printf("rr\n");
+	else if (*c == RRA)
+		ft_printf("rra\n");
+	else if (*c == RRB)
+		ft_printf("rrb\n");
+	else if (*c == RRR)
+		ft_printf("rrr\n");
 	return ;
 }
 
