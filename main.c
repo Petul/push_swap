@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:23:18 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 19:39:33 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:01:00 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 #include "libft/include/ft_printf.h"
 #include "push_swap.h"
 
+static int	is_unique(int av_i, char **av)
+{
+	int i;
+
+	i = 0;
+	while (i < av_i)
+	{
+		if (!ft_strcmp(av[i], av[av_i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static	int check_args(int ac, char **av)
 {
@@ -24,7 +37,7 @@ static	int check_args(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		if (!str_is_digit_and_space(av[i]))
+		if (!str_is_digit_and_space(av[i]) || !is_unique(i, av))
 			return (0);
 		i++;
 	}
