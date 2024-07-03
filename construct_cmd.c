@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:50:03 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 19:36:41 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:01:25 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ static	t_list	**construct_rrp(int r1, int r2, size_t a, size_t b)
 	return (cmd_list);
 }
 
-#define RR_DIST(a, b) min(a, b) + (a - min(a,b)) + (b - min(a,b))
 static size_t	calculate_index_of_shortest_insert(size_t *top_dsts)
 {
 	size_t shortest[2]; // 0: index, 1: len
