@@ -16,6 +16,8 @@
 # include <stddef.h>
 # include "libft/include/libft.h"
 
+# define RR_DIST(a, b) min(a, b) + (a - min(a,b)) + (b - min(a,b))
+
 typedef struct s_stack
 {
 	int *arr;

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //
 #include <stdlib.h>
+#include "libft/include/libft.h"
 #include "push_swap.h"
 
 /* Calculates a cost matrix with costs for different rotation alternatives
@@ -91,63 +91,62 @@ static t_list **get_cheapest_insert(t_stacks *s, size_t index)
 	ssize_t	insert_ind;
 	size_t *top_dsts;
 
-	insert_ind = find_rev_sort_ind(s->b, s->a->arr[index]);
+	insert_ind = find_rev_sort_ind(s->b, s->a->arr[index]); // Find insert index in B
 	if (insert_ind < 0)
 		return (NULL);
 	top_dsts = get_dists_to_top(s, index, insert_ind);
-	//printf("Top d for i=%zu :\n%5zu %2zu\n%5zu %2zu\n", index, top_dsts[0], top_dsts[2], top_dsts[1], top_dsts[3]);
 	cmd_list = construct_insertion_cmd(top_dsts);
 	free(top_dsts);
 	return (cmd_list);
 }
 
 /* Finds the index of the value in stack A which is the cheapest one to move to stack B */
-static ssize_t get_cheapest_index(t_stacks *s)
+static t_list **get_cheapest_move(t_stacks *s)
 {
 	t_list	**new;
+	t_list	**min_lst;
+	size_t	min_size;
 	size_t	i;
-	size_t	min_lst;
-	size_t	min_ix;
 
 	i = 0;
+	min_lst = malloc(sizeof(t_list *));
+	if (!min_lst)
+		return (NULL);
 	new = get_cheapest_insert(s, i);
 	if (!new)
-		return (-1);
-	min_lst = ft_lstsize(*new);
-	min_ix = i;
-	ft_lstclear(new, &free);
+		return (NULL);
+	*min_lst = *new;
+	min_size = ft_lstsize(*new);
 	free(new);
 	while (i < s->a->len)
 	{
 		new = get_cheapest_insert(s, i);
-		if (ft_lstsize(*new) < (int)min_lst)
+		if (ft_lstsize(*new) < (int)min_size)
 		{
-			min_ix = i;
-			min_lst = ft_lstsize(*new);
+			ft_lstclear(min_lst, &free);
+			*min_lst = *new;
+			min_size = ft_lstsize(*new);
 		}
-		ft_lstclear(new, &free);
+		else
+			ft_lstclear(new, &free);
 		free(new);
 		i++;
 	}
-	return (min_ix);
+	return (min_lst);
 }
 
 int	rev_sort_into_b(t_stacks *s, t_list **cmd_list)
 {
-	t_list	**new;
-	ssize_t	min_ix;
+	t_list	**cheapest;
 
 	while (s->a->len > 0)
 	{
-		min_ix = get_cheapest_index(s);
-		if (min_ix < 0)
+		cheapest = get_cheapest_move(s);
+		if (!cheapest)
 			return (-1);
-		new = get_cheapest_insert(s, min_ix);
-		if (!new)
-			return (-1);
-		stack_exec_cmds(s, *new);
-		ft_lstadd_back(cmd_list, *new);
-		free(new);
+		stack_exec_cmds(s, *cheapest);
+		ft_lstadd_back(cmd_list, *cheapest);
+		free(cheapest);
 	}
 	return (1);	
 }

@@ -155,6 +155,31 @@ static	t_list	**construct_rrp(int r1, int r2, size_t a, size_t b)
 	return (cmd_list);
 }
 
+#define RR_DIST(a, b) min(a, b) + (a - min(a,b)) + (b - min(a,b))
+static size_t	calculate_index_of_shortest_insert(size_t *top_dsts)
+{
+	size_t shortest[2]; // 0: index, 1: len
+	
+	shortest[0] = 0;
+	shortest[1] = RR_DIST(top_dsts[0], top_dsts[2]);
+	if (top_dsts[0] + top_dsts[3] < shortest[1])
+	{
+		shortest[0] = 1;
+		shortest[1] = top_dsts[0] + top_dsts[3];
+	}
+	if (top_dsts[1] + top_dsts[2] < shortest[1])
+	{
+		shortest[0] = 2;
+		shortest[1] = top_dsts[1] + top_dsts[2];
+	}
+	if (RR_DIST(top_dsts[1], top_dsts[3]) < shortest[1])
+	{
+		shortest[0] = 3;
+		shortest[1] = RR_DIST(top_dsts[1], top_dsts[3]);
+	}
+	return (shortest[0]);
+}
+
 /* Finds the optimal insertion command and returns it as a list
  * a: stack a and b rotated normally
  * b: stack a rotated normally and b reverse retated
@@ -163,33 +188,21 @@ static	t_list	**construct_rrp(int r1, int r2, size_t a, size_t b)
  */
 t_list	**construct_insertion_cmd(size_t *top_dsts)
 {
-	t_list **cmds[4];
-	t_list **shortest;
-	size_t min_list[4];
+	t_list	**cmd;
 	size_t min_i;
-	size_t i;
 
-	cmds[0] = construct_rrp(1, 1, top_dsts[0], top_dsts[2]);
-	cmds[1] = construct_rrp(1, -1, top_dsts[0], top_dsts[3]);
-	cmds[2] = construct_rrp(-1, 1, top_dsts[1], top_dsts[2]);
-	cmds[3] = construct_rrp(-1, -1, top_dsts[1], top_dsts[3]);
-	min_list[0] = ft_lstsize(*cmds[0]);
-	min_list[1] = ft_lstsize(*cmds[1]);
-	min_list[2] = ft_lstsize(*cmds[2]);
-	min_list[3] = ft_lstsize(*cmds[3]);
-	min_i = get_min_index(min_list, 4);
-	shortest = cmds[min_i];
-	i = 0;
-	while (i < 4)
-	{
-		if (i != min_i)
-		{
-			ft_lstclear(cmds[i], &free);
-			free(cmds[i]);
-		}
-		i++;
-	}
-	return (shortest);
+	min_i = calculate_index_of_shortest_insert(top_dsts);
+	if (min_i == 0)
+		cmd = construct_rrp(1, 1, top_dsts[0], top_dsts[2]);
+	else if (min_i == 1)
+		cmd = construct_rrp(1, -1, top_dsts[0], top_dsts[3]);
+	else if (min_i == 2)
+		cmd = construct_rrp(-1, 1, top_dsts[1], top_dsts[2]);
+	else if (min_i == 3)
+		cmd = construct_rrp(-1, -1, top_dsts[1], top_dsts[3]);
+	if (!cmd)
+		return (NULL);
+	return (cmd);
 }
 
 t_list **construct_n_cmd(t_cmd cmd, size_t n)
