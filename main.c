@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:23:18 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/03 14:01:00 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:35:53 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ int main(int argc, char **argv)
 	if (argc < 2 || !check_args(argc, argv))
 		error_exit();
 	s = create_stacks(argc - 1, &argv[1]);
-	 // ft_printf("Stack A:\n");
-	 // print_stack(s->a);
-	 // ft_printf("Stack B:\n");
-	 // print_stack(s->b);
 	if (!s)
 		error_exit();
 	if (push_swap(s) < 0)
