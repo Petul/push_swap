@@ -29,7 +29,7 @@ static t_stack	*create_stack_a(int ac, char **av)
 	return (stack_a);
 }
 
-static t_stack *crete_stack_b(int n_nums)
+static t_stack *create_stack_b(int n_nums)
 {
 	int		*num_array;
 	t_stack *stack_b;
@@ -48,18 +48,20 @@ t_stacks *create_stacks(int ac, char **av)
 	t_stacks *s;
 	
 	s = ft_calloc(1, sizeof(t_stacks));
+	if (!s)
+		return (NULL);
 	s->a = create_stack_a(ac, av);
 	if (!s->a)
+	{
+		free(s);
 		return (NULL);
-	s->b = crete_stack_b(s->a->len);
+	}
+	s->b = create_stack_b(s->a->len);
 	if (!s->b)
-			return (NULL);
+	{
+		free(s);
+		delete_stack(s->a);
+		return (NULL);
+	}
 	return (s);
-}
-
-void	delete_stacks(t_stacks *s)
-{
-	delete_stack(s->a);
-	delete_stack(s->b);
-	free(s);
 }

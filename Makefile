@@ -6,19 +6,21 @@
 #    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 14:36:26 by pleander          #+#    #+#              #
-#    Updated: 2024/07/03 15:00:48 by pleander         ###   ########.fr        #
+#    Updated: 2024/07/04 14:19:55 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := push_swap
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+#CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 CFILES := construct_cmd.c \
 		  init_stacks.c \
 		  main.c \
 		  parse.c \
 		  push_swap.c \
 		  rev_sort_into_b.c \
+		  sort_in_place.c \
 		  stack.c \
 		  stack_utils.c \
 		  utils.c \

@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:02:36 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 14:57:09 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:57:11 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ void	stack_exec_cmds(t_stacks *s, t_list *cmd_lst)
 	{
 		if (*(t_cmd *)(cmd_lst->content) == RA)
 			stack_rot(s->a);
-		else if (*(t_cmd *)(cmd_lst->content) == RRA)
-			stack_rev_rot(s->a);
-		else if (*(t_cmd *)(cmd_lst->content) == RB)
+		else if (*(t_cmd *)(cmd_lst->content) == RRA) stack_rev_rot(s->a); else if (*(t_cmd *)(cmd_lst->content) == RB)
 			stack_rot(s->b);
 		else if (*(t_cmd *)(cmd_lst->content) == RRB)
 			stack_rev_rot(s->b);
@@ -79,6 +77,8 @@ void	stack_exec_cmds(t_stacks *s, t_list *cmd_lst)
 			stack_push(s->b, s->a);
 		else if (*(t_cmd *)(cmd_lst->content) == PA)
 			stack_push(s->a, s->b);
+		else if (*(t_cmd *)(cmd_lst->content) == SA)
+			stack_swap(s->a);
 		cmd_lst = cmd_lst->next;
 	}
 	return ;

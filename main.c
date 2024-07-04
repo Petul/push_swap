@@ -52,8 +52,6 @@ static void error_exit(void)
 
 int main(int argc, char **argv)
 {
-	t_stacks *s;
-
 	if (argc < 2 || !check_args(argc, argv))
 		error_exit();
 	if (push_swap(argc - 1, &argv[1]) < 0)
@@ -62,7 +60,6 @@ int main(int argc, char **argv)
 	// print_stack(s->a);
 	// ft_printf("Stack B:\n");
 	// print_stack(s->b);
-	delete_stacks(s);
 	return (0);
 }
 

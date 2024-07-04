@@ -190,6 +190,7 @@ t_list	**construct_insertion_cmd(size_t *top_dsts)
 	t_list	**cmd;
 	size_t min_i;
 
+	cmd = NULL;
 	min_i = calculate_index_of_shortest_insert(top_dsts);
 	if (min_i == 0)
 		cmd = construct_rrp(1, 1, top_dsts[0], top_dsts[2]);
