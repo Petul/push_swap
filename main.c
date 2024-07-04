@@ -56,10 +56,7 @@ int main(int argc, char **argv)
 
 	if (argc < 2 || !check_args(argc, argv))
 		error_exit();
-	s = create_stacks(argc - 1, &argv[1]);
-	if (!s)
-		error_exit();
-	if (push_swap(s) < 0)
+	if (push_swap(argc - 1, &argv[1]) < 0)
 		error_exit(); //free stuff
 	// ft_printf("Stack A:\n");
 	// print_stack(s->a);

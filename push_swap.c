@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include "libft/include/libft.h"
+#include "libft/include/ft_printf.h"
 #include "push_swap.h"
 
 static	t_list **rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot)
@@ -109,6 +110,71 @@ static int	push_two_to_b(t_stacks *s, t_list **cmd_list)
 	return (1);
 }
 
+static t_list **sort_in_place(t_stacks *s)
+{
+	t_list **cmds;
+
+	cmds = ft_calloc(1, sizeof(t_list *));
+	if (!cmds)
+		return (NULL);
+	if (is_ordered(s->a))
+		rotate_a_min_on_top(s, cmds);
+	if (is_sorted(s->a))
+		return (cmds);
+
+	return (NULL);
+}
+
+static t_list **turksort(t_stacks *s)
+{
+	t_list **cmds;
+
+	cmds = ft_calloc(1, sizeof(t_list *));
+	if (!cmds)
+		return (NULL);
+	if (push_two_to_b(s, cmds) < 0)
+	 	return (NULL);
+	if (rev_sort_into_b(s, cmds) < 0)
+		return (NULL);
+	if (rotate_b_max_on_top(s, cmds) < 0)
+		return (NULL);
+	if (push_all_to_a(s, cmds) < 0)
+		return (NULL);
+	return (cmds);
+}
+
+static void	free_all(t_stacks *s1, t_stacks *s2, t_list **s1_cmds, t_list **s2_cmds)
+{
+	if (s1)
+	{
+		delete_stack(s1->a);
+		delete_stack(s1->b);
+		free(s1);
+	}
+	if (s2)
+	{
+		delete_stack(s2->a);
+		delete_stack(s2->b);
+		free(s2);
+	}
+	if (s1_cmds)
+	{
+		ft_lstclear(s1_cmds, &free);
+		free(s1_cmds);
+	}
+	if (s2_cmds)
+	{
+		ft_lstclear(s2_cmds, &free);
+		free(s2_cmds);
+	}
+}
+
+static void	error_exit(t_stacks *s1, t_stacks *s2, t_list **s1_cmds, t_list **s2_cmds)
+{
+	free_all(s1, s2, s1_cmds, s2_cmds);
+	ft_printf("Error\n");
+	exit(1);
+}
 /*
 *	1)	Push 2 elements from A to B
 *	2)	Push elements one at a time from A to B so that they are in descending
@@ -116,31 +182,29 @@ static int	push_two_to_b(t_stacks *s, t_list **cmd_list)
 *	3)	Rotate B so that largest element is at the top
 *	4)	Push all elements to A
 */
-
-#include <stdio.h>
-int	push_swap(t_stacks *s)
+int	push_swap(int n_args, char **args)
 {
-	t_list	**cmd_list;
+	t_stacks	*s1;
+	t_stacks	*s2;
+	t_list		**s1_cmds;
+	t_list		**s2_cmds;
 
-
-	cmd_list = ft_calloc(1, sizeof(t_list *));
-	if (is_ordered(s->a))
-		rotate_a_min_on_top(s, cmd_list);
-	if (is_sorted(s->a))
-	{
-		ft_lstiter(*cmd_list, &write_cmd);
-		return (1);
-	}
-	if (!cmd_list)
-		return (-1);
-	if (push_two_to_b(s, cmd_list) < 0)
-	 	return (-1);
-	rev_sort_into_b(s, cmd_list);
-	rotate_b_max_on_top(s, cmd_list);
-	push_all_to_a(s, cmd_list);
-	ft_lstiter(*cmd_list, &write_cmd);
-	ft_lstclear(cmd_list, &free);
-	free(cmd_list);
-
+	s1 = NULL;
+	s2 = NULL;
+	s1_cmds = NULL;
+	s2_cmds = NULL;
+	s1 = create_stacks(n_args, args);
+	s2 = create_stacks(n_args, args);
+	if (!s1 || !s2)
+		error_exit(s1, s2, s1_cmds, s2_cmds);
+	s1_cmds = sort_in_place(s1);
+	s2_cmds = turksort(s2);
+	if (!s1_cmds || !s2_cmds)
+		error_exit(s1, s2, s1_cmds, s2_cmds);
+	if (ft_lstsize(*s1_cmds) < ft_lstsize(*s2_cmds))
+		ft_lstiter(*s1_cmds, &write_cmd);
+	else
+		ft_lstiter(*s2_cmds, &write_cmd);
+	free_all(s1, s2, s1_cmds, s2_cmds);
 	return (1);
 }

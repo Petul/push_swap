@@ -47,7 +47,7 @@ typedef enum e_cmd
 	RRR
 }	t_cmd;
 
-int			push_swap(t_stacks *s);
+int			push_swap(int n_args, char **args);
 int			*parse_args(int *nums, int ac, char **av);
 int			str_is_digit_and_space(char *str);
 void		free_array(void **arr);
