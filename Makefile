@@ -6,7 +6,7 @@
 #    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 14:36:26 by pleander          #+#    #+#              #
-#    Updated: 2024/07/04 14:19:55 by pleander         ###   ########.fr        #
+#    Updated: 2024/07/05 16:04:15 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ CFILES := construct_cmd.c \
 		  parse.c \
 		  push_swap.c \
 		  rev_sort_into_b.c \
-		  sort_in_place.c \
 		  stack.c \
 		  stack_utils.c \
 		  utils.c \

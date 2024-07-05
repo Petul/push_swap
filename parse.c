@@ -90,6 +90,26 @@ static int *char_arr_to_int_arr(int *nums, char *c_arr)
 	return (i_arr);
 }
 
+static int	is_unique(int *i_arr, int nums)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while (i < nums)
+	{
+		j = 0;
+		while (j < i)
+		{
+			if (i_arr[j] == i_arr[i])
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	*parse_args(int *nums, int ac, char **av)
 {
 	char	*arr;
@@ -100,5 +120,10 @@ int	*parse_args(int *nums, int ac, char **av)
 		return (NULL);
 	i_arr = char_arr_to_int_arr(nums, arr);
 	free(arr);
+	if (is_unique(i_arr, *nums) < 0)
+	{
+		free(i_arr);
+		return (NULL);
+	}
 	return (i_arr);
 }

@@ -14,20 +14,6 @@
 #include "libft/include/ft_printf.h"
 #include "push_swap.h"
 
-static int	is_unique(int av_i, char **av)
-{
-	int i;
-
-	i = 0;
-	while (i < av_i)
-	{
-		if (!ft_strcmp(av[i], av[av_i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 static	int check_args(int ac, char **av)
 {
 	int	i;
@@ -37,7 +23,7 @@ static	int check_args(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		if (!str_is_digit_and_space(av[i]) || !is_unique(i, av))
+		if (!str_is_digit_and_space(av[i])) 
 			return (0);
 		i++;
 	}
@@ -50,16 +36,30 @@ static void error_exit(void)
 	exit(1);
 }
 
+static void free_stacks(t_stacks *s)
+{
+	delete_stack(s->a);
+	delete_stack(s->b);
+	free(s);
+}
+
 int main(int argc, char **argv)
 {
+	t_stacks *s;
+
+
 	if (argc < 2 || !check_args(argc, argv))
 		error_exit();
-	if (push_swap(argc - 1, &argv[1]) < 0)
-		error_exit(); //free stuff
-	// ft_printf("Stack A:\n");
-	// print_stack(s->a);
-	// ft_printf("Stack B:\n");
-	// print_stack(s->b);
+	s = create_stacks(argc - 1, &argv[1]);
+	if (!s)
+		error_exit();
+	if (push_swap(s) < 0)
+	{
+		free_stacks(s);
+		error_exit();
+	}
+	free_stacks(s);
+	return (0);
 	return (0);
 }
 

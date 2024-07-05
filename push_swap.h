@@ -17,6 +17,10 @@
 # include "libft/include/libft.h"
 
 # define RR_DIST(a, b) min(a, b) + (a - min(a,b)) + (b - min(a,b))
+# define FIRST_A s->a->arr[0]
+# define FIRST_B s->b->arr[0]
+# define LAST_A s->a->arr[s->a->len - 1]
+# define LAST_B s->b->arr[s->b->len - 1]
 
 typedef struct s_stack
 {
@@ -47,7 +51,7 @@ typedef enum e_cmd
 	RRR
 }	t_cmd;
 
-int			push_swap(int n_args, char **args);
+int			push_swap(t_stacks *s);
 int			*parse_args(int *nums, int ac, char **av);
 int			str_is_digit_and_space(char *str);
 void		free_array(void **arr);
@@ -72,9 +76,7 @@ size_t		get_min_index(size_t *arr, size_t len);
 int			is_sorted(t_stack *s);
 int			is_ordered(t_stack *s);
 t_list		**rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot);
-t_list		**sort_in_place(t_stacks *s);
-
-
+t_list		**sort_in_place(t_stacks *s, t_list **cmds);
 
 #endif
 

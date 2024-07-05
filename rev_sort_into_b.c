@@ -40,6 +40,8 @@ static ssize_t	find_rev_sort_ind(t_stack *s, int num)
 	size_t	i;
 
 	i = 0;
+	if (s->len < 2)
+		return (0);
 	while (i < s->len)
 	{
 		if (i == 0)
@@ -139,7 +141,7 @@ int	rev_sort_into_b(t_stacks *s, t_list **cmd_list)
 {
 	t_list	**cheapest;
 
-	while (s->a->len > 0)
+	while (s->a->len > 3)
 	{
 		cheapest = get_cheapest_move(s);
 		if (!cheapest)

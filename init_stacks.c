@@ -21,7 +21,7 @@ static t_stack	*create_stack_a(int ac, char **av)
 	t_stack *stack_a;
 
 	num_array = parse_args(&n_nums, ac, av);
-	if (n_nums < 0)
+	if (!num_array)
 		return (NULL);
 	stack_a = create_stack(n_nums, n_nums, num_array);
 	if (!stack_a)
