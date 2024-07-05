@@ -6,13 +6,12 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:58:40 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/04 15:21:18 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:13:17 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/include/libft.h"
-#include "libft/include/ft_printf.h"
 #include "push_swap.h"
 
 static int	rotate_b_max_on_top(t_stacks *s, t_list **cmd_list)
@@ -99,21 +98,21 @@ static int	sort_three(t_stacks *s, t_list **cmds)
 {
 	t_cmd *cmd_ptr;
 	t_list *new;
+
 	if (!is_ordered(s->a))
 	{
-	cmd_ptr = malloc(sizeof(t_cmd));
-	if (!cmd_ptr)
-		return (-1);
-	*cmd_ptr = SA;
-	new = ft_lstnew(cmd_ptr);
-	if (!new)
-	{
-		free(cmd_ptr);
-		return (-1);
-	}
-	stack_exec_cmds(s, new);
-	ft_lstadd_back(cmds, new);
-		 
+		cmd_ptr = malloc(sizeof(t_cmd));
+		if (!cmd_ptr)
+			return (-1);
+		*cmd_ptr = SA;
+		new = ft_lstnew(cmd_ptr);
+		if (!new)
+		{
+			free(cmd_ptr);
+			return (-1);
+		}
+		stack_exec_cmds(s, new);
+		ft_lstadd_back(cmds, new);
 	}
 	rotate_a_min_on_top(s, cmds);
 	return (1);
