@@ -15,6 +15,15 @@
 #include "libft/include/libft.h"
 #include "push_swap.h"
 
+static char *free_args_and_return_null(void *a1, void *a2)
+{
+	if (a1)
+		free(a1);
+	if (a2)
+		free(a2);
+	return (NULL);
+}
+
 static char *join_args(int ac, char **av)
 {
 	int		i;
@@ -31,16 +40,9 @@ static char *join_args(int ac, char **av)
 		c = ft_snprintf((void *)NULL, 0, "%s %s", a1, av[i]);
 		a2 = ft_calloc(c + 1, sizeof(char));
 		if (!a2)
-		{
-			//free array
-			return (NULL);
-		}
+			return	(free_args_and_return_null((void *)a1, NULL));
 		if (ft_snprintf(a2, c + 1, "%s %s", a1, av[i]) < 0)
-		{
-			// free array
-			free(a1);
-			return (NULL);
-		}
+			return	(free_args_and_return_null((void *)a1, (void *)a2));
 		free(a1);
 		a1 = a2;
 		i++;
@@ -64,6 +66,7 @@ static int	count_nums(char *arr)
 	}
 	return (i);
 }
+
 static int overflowed(char *s, int n)
 {
 	if (s[0] == '-' && n >= 0)
@@ -85,10 +88,7 @@ static int *char_arr_to_int_arr(int *nums, char *c_arr)
 		return (NULL);
 	s_arr = ft_split(c_arr, ' ');
 	if (!s_arr)
-	{
-		free(i_arr);
-		return (NULL);
-	}
+		return ((int *)free_args_and_return_null((void *)i_arr, NULL));
 	i = 0;
 	while (s_arr[i])
 	{
@@ -96,8 +96,7 @@ static int *char_arr_to_int_arr(int *nums, char *c_arr)
 		if (overflowed(s_arr[i], i_arr[i]))
 		{
 			free_array((void **)s_arr);
-			free(i_arr);
-			return (NULL);
+			return ((int *)free_args_and_return_null((void *)i_arr, NULL));
 		}
 		i++;
 	}
