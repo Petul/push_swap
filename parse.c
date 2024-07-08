@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 09:41:05 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/25 13:37:04 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:52:40 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ static int	count_nums(char *arr)
 	}
 	return (i);
 }
+static int overflowed(char *s, int n)
+{
+	if (s[0] == '-' && n >= 0)
+		return (1);
+	if (s[0] != '-' && n < 0)
+		return (1);
+	return (0);
+}
+
 static int *char_arr_to_int_arr(int *nums, char *c_arr)
 {
 	int		i;
@@ -84,6 +93,12 @@ static int *char_arr_to_int_arr(int *nums, char *c_arr)
 	while (s_arr[i])
 	{
 		i_arr[i] = ft_atoi(s_arr[i]);
+		if (overflowed(s_arr[i], i_arr[i]))
+		{
+			free_array((void **)s_arr);
+			free(i_arr);
+			return (NULL);
+		}
 		i++;
 	}
 	free_array((void **)s_arr);
@@ -120,6 +135,8 @@ int	*parse_args(int *nums, int ac, char **av)
 		return (NULL);
 	i_arr = char_arr_to_int_arr(nums, arr);
 	free(arr);
+	if (!i_arr)
+		return (NULL);
 	if (is_unique(i_arr, *nums) < 0)
 	{
 		free(i_arr);
