@@ -12,7 +12,6 @@
 
 #include "stdlib.h"
 #include "libft/include/libft.h"
-#include <stdio.h> //
 #include "push_swap.h"
 
 static int	append_n_cmds(t_list **cmd_list, t_cmd cmd, size_t n)

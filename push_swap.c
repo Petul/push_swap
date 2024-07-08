@@ -98,14 +98,17 @@ static t_list **turksort(t_stacks *s)
 	cmds = ft_calloc(1, sizeof(t_list *));
 	if (!cmds)
 		return (NULL);
-	if (rev_sort_into_b(s, cmds) < 0)
-		return (NULL);
-	if (rotate_b_max_on_top(s, cmds) < 0)
-		return (NULL);
-	if (sort_three(s, cmds) < 0)
-		return (NULL);
-	if (push_all_to_a(s, cmds) < 0)
-		return (NULL);
+	if (!is_ordered(s->a))
+	{
+		if (rev_sort_into_b(s, cmds) < 0)
+			return (NULL);
+		if (rotate_b_max_on_top(s, cmds) < 0)
+			return (NULL);
+		if (sort_three(s, cmds) < 0)
+			return (NULL);
+		if (push_all_to_a(s, cmds) < 0)
+			return (NULL);
+	}
 	if (rotate_a_min_on_top(s, cmds) < 0)
 		return (NULL);
 	return (cmds);
