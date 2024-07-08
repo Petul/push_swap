@@ -76,23 +76,23 @@ void	write_cmd(void *content)
 	return ;
 }
 
-size_t	get_min_index(size_t *arr, size_t len)
-{
-	size_t	i;
-	size_t	min_i;
-	size_t	min_n;
-
-	min_n = arr[0];
-	min_i = 0;
-	i = 1;
-	while (i < len)
-	{
-		if (arr[i] < min_n)
-		{
-			min_i = i;
-			min_n = arr[i];
-		}
-		i++;
-	}
-	return (min_i);
-}
+// size_t	get_min_index(size_t *arr, size_t len)
+// {
+// 	size_t	i;
+// 	size_t	min_i;
+// 	size_t	min_n;
+//
+// 	min_n = arr[0];
+// 	min_i = 0;
+// 	i = 1;
+// 	while (i < len)
+// 	{
+// 		if (arr[i] < min_n)
+// 		{
+// 			min_i = i;
+// 			min_n = arr[i];
+// 		}
+// 		i++;
+// 	}
+// 	return (min_i);
+// }

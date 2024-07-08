@@ -21,6 +21,8 @@
 # define FIRST_B s->b->arr[0]
 # define LAST_A s->a->arr[s->a->len - 1]
 # define LAST_B s->b->arr[s->b->len - 1]
+# define A(i) s->a->arr[i]
+# define B(i) s->b->arr[i]
 
 typedef struct s_stack
 {
