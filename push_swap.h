@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:43:42 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/04 14:17:35 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:39:46 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ int			is_sorted(t_stack *s);
 int			is_ordered(t_stack *s);
 t_list		**rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot);
 t_list		**sort_in_place(t_stacks *s, t_list **cmds);
+int			append_cmd_to_cmds(t_cmd cmd, t_list **cmds);
+int			stack_get_max(t_stack *s);
+int			stack_get_min(t_stack *s);
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:42:06 by pleander          #+#    #+#             */
-/*   Updated: 2024/06/26 15:39:26 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:37:29 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,37 +82,5 @@ void stack_push(t_stack *target, t_stack *source)
 	target->arr[0] = source->arr[0];
 	source->len--;
 	ft_memmove(source->arr, source->arr + 1, source->len * sizeof(int));
-	return ;
-}
-
-/*
-* Rotates the stack.
-* The first element becomes the last
-*/
-void stack_rot(t_stack *stack)
-{
-	int	first;
-
-	if (stack->len < 2)
-		return ;
-	first = stack->arr[0];
-	ft_memmove(stack->arr, stack->arr + 1, (stack->len - 1) * sizeof(int));
-	stack->arr[stack->len - 1] = first;
-	return ;
-}
-
-/*
-* Reverse rotates the stack.
-* The last element becomes the first
-*/
-void stack_rev_rot(t_stack *stack)
-{
-	int	last;
-
-	if (stack->len < 2)
-		return ;
-	last = stack->arr[stack->len - 1];
-	ft_memmove(stack->arr + 1, stack->arr, (stack->len - 1) * sizeof(int));
-	stack->arr[0] = last;
 	return ;
 }
