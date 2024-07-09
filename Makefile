@@ -13,7 +13,7 @@
 NAME := push_swap
 CC := cc
 #CFLAGS := -Wall -Wextra -Werror
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
 CFILES := construct_cmd.c \
 		  init_stacks.c \
 		  main.c \
@@ -34,7 +34,7 @@ OBJECTS := $(CFILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJECTS)
-	$(CC) $(OBJECTS) $(LIBFT) -o $(NAME)
+	$(CC) $(OBJECTS) $(LIBFT) -lasan -o $(NAME)
 
 $(LIBFT):
 	make -C libft
