@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft/include/ft_printf.h"
 #include "libft/include/libft.h"
 #include "push_swap.h"
 
@@ -102,31 +103,57 @@ static t_list **get_cheapest_insert(t_stacks *s, size_t index)
 	return (cmd_list);
 }
 
-/* Finds the index of the value in stack A which is the cheapest one to move to stack B */
-static t_list **get_cheapest_move(t_stacks *s)
+/* Finds the chain of commands for the optimal move for an element from A to B */
+// static t_list **find_optimal_cmds(t_stacks *s)
+// {
+// 	t_list	**new;
+// 	t_list	**min_lst;
+// 	size_t	min_size;
+// 	size_t	i;
+//
+// 	i = 0;
+// 	new = get_cheapest_insert(s, i);
+// 	min_lst = malloc(sizeof(t_list *));
+// 	if (!min_lst || !new)
+// 		return (NULL);
+// 	*min_lst = *new;
+// 	min_size = ft_lstsize(*new);
+// 	free(new);
+// 	while (i < s->a->len)
+// 	{
+// 		new = get_cheapest_insert(s, i);
+// 		if (ft_lstsize(*new) < (int)min_size)
+// 		{
+// 			ft_lstclear(min_lst, &free);
+// 			*min_lst = *new;
+// 			min_size = ft_lstsize(*new);
+// 		}
+// 		else
+// 			ft_lstclear(new, &free);
+// 		free(new);
+// 		i++;
+// 	}
+// 	return (min_lst);
+// }
+/* Finds the chain of commands for the optimal move for an element from A to B */
+static int	find_optimal_cmds(t_stacks *s, t_list **optimal)
 {
 	t_list	**new;
-	t_list	**min_lst;
-	size_t	min_size;
+	int		min_size;
 	size_t	i;
 
 	i = 0;
-	min_lst = malloc(sizeof(t_list *));
-	if (!min_lst)
-		return (NULL);
-	new = get_cheapest_insert(s, i);
-	if (!new)
-		return (NULL);
-	*min_lst = *new;
-	min_size = ft_lstsize(*new);
-	free(new);
+	min_size = -1;
 	while (i < s->a->len)
 	{
 		new = get_cheapest_insert(s, i);
-		if (ft_lstsize(*new) < (int)min_size)
+		if (!new)
+			return (-1);
+		if (min_size < 0 || ft_lstsize(*new) < min_size)
 		{
-			ft_lstclear(min_lst, &free);
-			*min_lst = *new;
+			if ((*optimal))
+				ft_lstclear(optimal, &free);
+			*optimal = *new;
 			min_size = ft_lstsize(*new);
 		}
 		else
@@ -134,21 +161,27 @@ static t_list **get_cheapest_move(t_stacks *s)
 		free(new);
 		i++;
 	}
-	return (min_lst);
+	return (min_size);
 }
 
 int	rev_sort_into_b(t_stacks *s, t_list **cmd_list)
 {
-	t_list	**cheapest;
+	t_list	**optimal;
+	int		optimal_len;
 
+	optimal = ft_calloc(1, sizeof(t_list *));
+	if (!optimal)
+		return (-1);
 	while (s->a->len > 3)
 	{
-		cheapest = get_cheapest_move(s);
-		if (!cheapest)
+		optimal_len = find_optimal_cmds(s, optimal);
+		if (optimal_len < 0)
 			return (-1);
-		stack_exec_cmds(s, *cheapest);
-		ft_lstadd_back(cmd_list, *cheapest);
-		free(cheapest);
+		stack_exec_cmds(s, *optimal);
+		ft_lstiter(*optimal, &write_cmd);
+		ft_lstadd_back(cmd_list, *optimal);
+		//free(optimal);
 	}
+	free(optimal);
 	return (1);	
 }

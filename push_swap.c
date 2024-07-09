@@ -17,7 +17,7 @@
 static int	rotate_b_max_on_top(t_stacks *s, t_list **cmd_list)
 {
 	t_list	**new_cmds;
-	size_t	max_i;
+	int		max_i;
 
 	max_i = stack_get_max(s->b);
 	if (max_i < 0)
@@ -58,7 +58,7 @@ static int	push_all_to_a(t_stacks *s, t_list **cmd_list)
 static int	rotate_a_min_on_top(t_stacks *s, t_list **cmd_list)
 {
 	t_list	**new_cmds;
-	size_t	min_i;
+	int		min_i;
 
 	min_i = stack_get_min(s->a);
 	if (min_i < 0)

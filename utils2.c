@@ -59,7 +59,6 @@ int is_ordered(t_stack *s)
 	if (n <= s->arr[0])
 		return (1);
 	return (0);
-
 }
 
 t_list **rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot)
