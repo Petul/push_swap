@@ -19,10 +19,13 @@
 # define RR_DIST(a, b) min(a, b) + (a - min(a,b)) + (b - min(a,b))
 # define FIRST_A s->a->arr[0]
 # define FIRST_B s->b->arr[0]
+# define FIRST_S s->arr[0]
 # define LAST_A s->a->arr[s->a->len - 1]
 # define LAST_B s->b->arr[s->b->len - 1]
+# define LAST_S s->arr[s->len - 1]
 # define A(i) s->a->arr[i]
 # define B(i) s->b->arr[i]
+# define S(i) s->arr[i]
 
 typedef struct s_stack
 {
@@ -74,11 +77,10 @@ void		stack_exec_cmds(t_stacks *s, t_list *cmd_lst);
 int			rev_sort_into_b(t_stacks *s, t_list **cmd_list);
 void		write_cmd(void *content);
 t_list		**construct_n_cmd(t_cmd cmd, size_t n);
-size_t		get_min_index(size_t *arr, size_t len);
 int			is_sorted(t_stack *s);
 int			is_ordered(t_stack *s);
 t_list		**rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot);
-t_list		**sort_in_place(t_stacks *s, t_list **cmds);
+//t_list		**sort_in_place(t_stacks *s, t_list **cmds);
 int			append_cmd_to_cmds(t_cmd cmd, t_list **cmds);
 int			stack_get_max(t_stack *s);
 int			stack_get_min(t_stack *s);

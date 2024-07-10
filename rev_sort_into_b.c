@@ -32,51 +32,47 @@ static size_t	*get_dists_to_top(t_stacks *s, size_t i_a, size_t i_b)
 	return (dists);
 }
 
+static int	get_min_max_ind(t_stack *s, int num)
+{
+	int	i;
+
+	i = stack_get_max(s);
+	if (s->len > 0 && num > S(i))
+	{
+		if (i == 0)
+			return (s->len - 1);
+		return (i);
+	}
+	i = stack_get_min(s);
+	if (s->len > 0 && num < S(i))
+	{
+		if ((size_t)i == s->len - 1)
+			return (0);
+		return (i + 1);
+	}
+	return (-1);
+}
+
 /* Get index where number should be inserted so that the stack remains
  * sorted descendingly
  */
-static ssize_t	find_rev_sort_ind(t_stack *s, int num)
+static int	find_rev_sort_ind(t_stack *s, int num)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	if (s->len < 2)
+	i = get_min_max_ind(s, num);
+	if (i >= 0)
+		return (i);
+	if (s->len > 0 && num > FIRST_S && num < LAST_S)
 		return (0);
-	while (i < s->len)
+	i = 1;
+	while ((size_t)i < s->len)
 	{
-		if (i == 0)
-		{
-			if (num > s->arr[0] && num <= s->arr[s->len - 1])
-				return (0);
-			if (s->arr[s->len - 1] < s->arr[0]) //  Max number
-			{
-				if (num > s->arr[0])
-					return (0);
-			}
-			if (s->arr[s->len - 1] < s->arr[0]) //  Min number
-			{
-				if (num < s->arr[s->len - 1])
-					return (0);
-			}
-		}
-		else
-		{
-			if (num < s->arr[i - 1] && num >= s->arr[i])
-				return (i);
-			if (s->arr[i - 1] < s->arr[i]) //  Max number
-			{
-				if (num > s->arr[i])
-					return (i);
-			}
-			if (s->arr[i - 1] < s->arr[i]) //  Min number
-			{
-				if (num < s->arr[i - 1])
-					return (i);
-			}
-		}
+		if (num < S(i - 1) && num > S(i))
+			return (i);
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 
 /* Calculates the cheapest way to insert index from stack A to stack B so that
@@ -122,13 +118,10 @@ static int	find_optimal_cmds(t_stacks *s, t_list **optimal)
 				ft_lstclear(optimal, &free);
 			*optimal = *new;
 			min_size = ft_lstsize(*optimal);
-			free(new);
 		}
 		else
-		{
 			ft_lstclear(new, &free);
-			free(new);
-		}
+		free(new);
 		i++;
 	}
 	return (min_size);
