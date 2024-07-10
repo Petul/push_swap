@@ -18,8 +18,8 @@
 */
 void	stack_rot_n(t_stack *stack, size_t n)
 {
-	size_t i;
-	int	first;
+	size_t	i;
+	int		first;
 
 	i = 0;
 	while (i < n)
@@ -41,7 +41,7 @@ void	stack_rev_rot_n(t_stack *stack, size_t n)
 {
 	size_t	i;
 	int		last;
-	
+
 	i = 0;
 	while (i < n)
 	{

@@ -15,14 +15,14 @@
 
 static void	stack_rot2(t_stack *a, t_stack *b)
 {
-			stack_rot_n(a, 1);
-			stack_rot_n(b, 1);
+	stack_rot_n(a, 1);
+	stack_rot_n(b, 1);
 }
 
 static void	stack_rev_rot2(t_stack *a, t_stack *b)
 {
-			stack_rev_rot_n(a, 1);
-			stack_rev_rot_n(b, 1);
+	stack_rev_rot_n(a, 1);
+	stack_rev_rot_n(b, 1);
 }
 
 void	stack_exec_cmds(t_stacks *s, t_list *cmd_lst)
