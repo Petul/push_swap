@@ -54,7 +54,7 @@ int	stack_get_max(t_stack *s)
 	size_t	i;
 
 	if (s->len < 1)
-		return (-1);
+		return (0);
 	max_i = 0;
 	max_n = s->arr[0];
 	i = 0;
@@ -80,7 +80,7 @@ int	stack_get_min(t_stack *s)
 	size_t	i;
 
 	if (s->len < 1)
-		return (-1);
+		return (0);
 	min_i = 0;
 	min_n = s->arr[0];
 	i = 0;

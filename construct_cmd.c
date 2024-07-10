@@ -14,36 +14,41 @@
 #include "libft/include/libft.h"
 #include "push_swap.h"
 
+static t_list *lst_new_cmd(t_cmd cmd)
+{
+	t_list	*lst;
+	t_cmd	*cmd_ptr;
+
+	cmd_ptr = malloc(sizeof(t_cmd));
+	if (!cmd_ptr)
+		return (NULL);
+	*cmd_ptr = cmd;
+	lst = ft_lstnew(cmd_ptr);
+	if (!lst)
+	{
+		free(cmd_ptr);
+		return (NULL);
+	}
+	return (lst);
+}
+
 static int	append_n_cmds(t_list **cmd_list, t_cmd cmd, size_t n)
 {
 	size_t	i;
-	t_list *new;
-	t_cmd *cmd_ptr;
-	t_list *last;
+	t_list	*new;
+	t_list	*last;
 
 	last = NULL;
 	i = 0;
 	while (i < n)
 	{
-		cmd_ptr = malloc(sizeof(t_cmd));
-		if (!cmd_ptr)
-			return (-1);
-		*cmd_ptr = cmd;
-		new = ft_lstnew(cmd_ptr);
+		new = lst_new_cmd(cmd);
 		if (!new)
-		{
-			//clear array
-			//free(cmd_ptr);
 			return (-1);
-		}
 		if (!last)
-		{
 			ft_lstadd_back(cmd_list, new);
-		}
 		else
-		{
 			last->next = new;
-		}
 		last = new;
 		i++;
 	}
@@ -59,98 +64,81 @@ static	size_t min(size_t a, size_t b)
 		return (a);
 	return (b);
 }
-/* r1 and r2 determine what direction the array is rotated
- * > 0 normal rotation
- * <= reverse rotation
- */
+
+static void assign_cmds(t_cmd cmds[3], t_cmd a, t_cmd b, t_cmd c)
+{
+	cmds[0] = a;
+	cmds[1] = b;
+	cmds[2] = c;
+}
+
+static void assign_rots(size_t rots[3], size_t a, size_t b, size_t c)
+{
+	rots[0] = a;
+	rots[1] = b;
+	rots[2] = c;
+}
+
+static void	construct_rrp_config(size_t rots[3], t_cmd cmds[3], int r[2], size_t sz[2])
+{
+	size_t common_rots;
+	
+	if (r[0] == r[1])
+	{
+		common_rots = min(sz[0], sz[1]);
+		assign_rots(rots, common_rots, sz[0] - common_rots, sz[1] - common_rots);
+		if (r[0] > 0)
+			assign_cmds(cmds, RR, RA, RB);
+		else
+			assign_cmds(cmds, RRR, RRA, RRB);
+	}
+	else 
+	{
+		assign_rots(rots, sz[0], sz[1], 0);
+		if (r[0] > 0)
+			cmds[0] = RA;
+		else
+			cmds[0] = RRA;
+		if (r[1] > 0)
+			cmds[1] = RB;
+		else
+			cmds[1] = RRB;
+	}
+}
+
+static void	*free_list_and_return_null(t_list **list)
+{
+	ft_lstclear(list, &free);
+	free(list);
+	return (NULL);
+}
+
 static	t_list	**construct_rrp(int r1, int r2, size_t a, size_t b)
 {
 	t_list	**cmd_list;
-	size_t	common_rotations;
+	size_t	rots[3];
+	t_cmd	cmds[3];
+	int		i;
+	int		r[2];
+	size_t	sz[2];
 
+	r[0] = r1;
+	r[1] = r2;
+	sz[0] = a;
+	sz[1] = b;
+	construct_rrp_config(rots, cmds, r, sz);
 	cmd_list = ft_calloc(1, sizeof(t_list *));
 	if (!cmd_list)
 		return (NULL);
-	if (r1 == r2)
+	i = 0;
+	while (i < 3)
 	{
-		common_rotations = min(a, b);
-		if (r1 > 0)
-		{
-			if (append_n_cmds(cmd_list, RR, common_rotations) < 0)
-			{
-				//free stuff
-				return (NULL);
-			}
-			if (append_n_cmds(cmd_list, RA, a - common_rotations) < 0)
-			{
-				//free stuff
-				return (NULL);
-			}
-			if (append_n_cmds(cmd_list, RB, b - common_rotations) < 0)
-			{
-				//free stuff
-				return (NULL);
-			}
-		}
-		else
-		{
-			if (append_n_cmds(cmd_list, RRR, common_rotations) < 0)
-			{
-				//free stuff
-				return (NULL);
-			}
-			if (append_n_cmds(cmd_list, RRA, a - common_rotations) < 0)
-			{
-				//free stuff
-				return (NULL);
-			}
-			if (append_n_cmds(cmd_list, RRB, b - common_rotations) < 0)
-			{
-				//free stuff
-				return (NULL);
-			}
-		}
-	}
-	else
-	{	
-		if (r1 > 0)
-		{
-			if (append_n_cmds(cmd_list, RA, a) < 0)
-			{
-				//free everything
-				return (NULL);
-			}
-		}
-		else
-		{
-			if (append_n_cmds(cmd_list, RRA, a) < 0)
-			{
-				//free everything
-				return (NULL);
-			}
-		}
-		if (r2 > 0)
-		{
-			if (append_n_cmds(cmd_list, RB, b) < 0)
-			{
-				//free everything
-				return (NULL);
-			}
-		}
-		else
-		{
-			if (append_n_cmds(cmd_list, RRB, b) < 0)
-			{
-				//free everything
-				return (NULL);
-			}
-		}
+		if (rots[i] > 0 && append_n_cmds(cmd_list, cmds[i], rots[i]) < 0)
+			return(free_list_and_return_null(cmd_list));
+		i++;
 	}
 	if (append_n_cmds(cmd_list, PB, 1) < 0)
-	{
-		//free everything
-		return (NULL);
-	}
+		return(free_list_and_return_null(cmd_list));
 	return (cmd_list);
 }
 
@@ -178,7 +166,8 @@ static size_t	calculate_index_of_shortest_insert(size_t *top_dsts)
 	return (shortest[0]);
 }
 
-/* Finds the optimal insertion command and returns it as a list
+/*
+ * Finds the optimal insertion command and returns it as a list
  * a: stack a and b rotated normally
  * b: stack a rotated normally and b reverse retated
  * c: stack b rotated normally and a reverse rotated
