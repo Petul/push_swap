@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/ft_printf.h"
 #include "libft/include/libft.h"
 #include "push_swap.h"
 
@@ -104,38 +103,6 @@ static t_list **get_cheapest_insert(t_stacks *s, size_t index)
 }
 
 /* Finds the chain of commands for the optimal move for an element from A to B */
-// static t_list **find_optimal_cmds(t_stacks *s)
-// {
-// 	t_list	**new;
-// 	t_list	**min_lst;
-// 	size_t	min_size;
-// 	size_t	i;
-//
-// 	i = 0;
-// 	new = get_cheapest_insert(s, i);
-// 	min_lst = malloc(sizeof(t_list *));
-// 	if (!min_lst || !new)
-// 		return (NULL);
-// 	*min_lst = *new;
-// 	min_size = ft_lstsize(*new);
-// 	free(new);
-// 	while (i < s->a->len)
-// 	{
-// 		new = get_cheapest_insert(s, i);
-// 		if (ft_lstsize(*new) < (int)min_size)
-// 		{
-// 			ft_lstclear(min_lst, &free);
-// 			*min_lst = *new;
-// 			min_size = ft_lstsize(*new);
-// 		}
-// 		else
-// 			ft_lstclear(new, &free);
-// 		free(new);
-// 		i++;
-// 	}
-// 	return (min_lst);
-// }
-/* Finds the chain of commands for the optimal move for an element from A to B */
 static int	find_optimal_cmds(t_stacks *s, t_list **optimal)
 {
 	t_list	**new;
@@ -154,11 +121,14 @@ static int	find_optimal_cmds(t_stacks *s, t_list **optimal)
 			if ((*optimal))
 				ft_lstclear(optimal, &free);
 			*optimal = *new;
-			min_size = ft_lstsize(*new);
+			min_size = ft_lstsize(*optimal);
+			free(new);
 		}
 		else
+		{
 			ft_lstclear(new, &free);
-		free(new);
+			free(new);
+		}
 		i++;
 	}
 	return (min_size);
@@ -178,9 +148,8 @@ int	rev_sort_into_b(t_stacks *s, t_list **cmd_list)
 		if (optimal_len < 0)
 			return (-1);
 		stack_exec_cmds(s, *optimal);
-		ft_lstiter(*optimal, &write_cmd);
 		ft_lstadd_back(cmd_list, *optimal);
-		//free(optimal);
+		*optimal = NULL;
 	}
 	free(optimal);
 	return (1);	
