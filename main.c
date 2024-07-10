@@ -14,7 +14,7 @@
 #include "libft/include/ft_printf.h"
 #include "push_swap.h"
 
-static	int check_args(int ac, char **av)
+static int	check_args(int ac, char **av)
 {
 	int	i;
 
@@ -23,30 +23,29 @@ static	int check_args(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		if (!str_is_digit_and_space(av[i])) 
+		if (!str_is_digit_and_space(av[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static void error_exit(void)
+static void	error_exit(void)
 {
 	ft_printf("Error\n");
 	exit(1);
 }
 
-static void free_stacks(t_stacks *s)
+static void	free_stacks(t_stacks *s)
 {
 	delete_stack(s->a);
 	delete_stack(s->b);
 	free(s);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stacks *s;
-
+	t_stacks	*s;
 
 	if (argc < 2 || !check_args(argc, argv))
 		error_exit();
@@ -61,5 +60,3 @@ int main(int argc, char **argv)
 	free_stacks(s);
 	return (0);
 }
-
-

@@ -6,23 +6,24 @@
 #    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 14:36:26 by pleander          #+#    #+#              #
-#    Updated: 2024/07/08 11:35:26 by pleander         ###   ########.fr        #
+#    Updated: 2024/07/10 16:04:33 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := push_swap
 CC := cc
 #CFLAGS := -Wall -Wextra -Werror
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS := -Wall -Wextra -Werror -g
 CFILES := construct_cmd.c \
 		  init_stacks.c \
 		  main.c \
 		  parse.c \
+		  parse2.c \
 		  push_swap.c \
 		  rev_sort_into_b.c \
 		  stack.c \
 		  stack2.c \
-		  stack_utils.c \
+		  stack3.c \
 		  utils.c \
 		  utils2.c
 
@@ -34,7 +35,7 @@ OBJECTS := $(CFILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJECTS)
-	$(CC) $(OBJECTS) $(LIBFT) -lasan -o $(NAME)
+	$(CC) $(OBJECTS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C libft

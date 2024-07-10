@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:58:40 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/08 11:49:42 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:50:00 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ static int	rotate_b_max_on_top(t_stacks *s, t_list **cmd_list)
 
 /* Pushes everything from B to A checking that it goes in the correct place.
  * It the location is not correct A is reverse rotated. As a consequence of B
- * being reverse ordered, reverse rotating A will be shorter than normal rotation of A
+ * being reverse ordered, reverse rotating A will be shorter than normal
+ * rotation of A
  */
 static int	push_all_to_a(t_stacks *s, t_list **cmd_list)
 {
-	t_list **new_cmds;
+	t_list	**new_cmds;
 
 	while (s->b->len > 0)
 	{
@@ -76,7 +77,7 @@ static int	sort_three(t_stacks *s, t_list **cmds)
 {
 	if (!is_ordered(s->a))
 	{
-		append_cmd_to_cmds(SA ,cmds);
+		append_cmd_to_cmds(SA, cmds);
 		stack_swap(s->a);
 	}
 	if (rotate_a_min_on_top(s, cmds) < 0)
@@ -91,9 +92,9 @@ static int	sort_three(t_stacks *s, t_list **cmds)
 *	3)	Rotate B so that largest element is at the top
 *	4)	Push all elements to A
 */
-static t_list **turksort(t_stacks *s)
+static t_list	**turksort(t_stacks *s)
 {
-	t_list **cmds;
+	t_list	**cmds;
 
 	cmds = ft_calloc(1, sizeof(t_list *));
 	if (!cmds)

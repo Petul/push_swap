@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:43:42 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/08 11:39:46 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:02:56 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ t_stack		*create_stack(size_t size, size_t len, int *num_array);
 void		delete_stack(t_stack *stack);
 void		print_stack(t_stack *stack);
 void		stack_swap(t_stack *stack);
-void		stack_push(t_stack *target, t_stack *source);
-void		stack_rot(t_stack *stack);
 void		stack_rev_rot(t_stack *stack);
 void		stack_rev_rot_n(t_stack *s, size_t n);
 void		stack_rot_n(t_stack *s, size_t n);
@@ -84,6 +82,8 @@ t_list		**rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot);
 int			append_cmd_to_cmds(t_cmd cmd, t_list **cmds);
 int			stack_get_max(t_stack *s);
 int			stack_get_min(t_stack *s);
+int			is_unique(int *i_arr, int nums);
+int			overflowed(char *s, int n);
 
 #endif
 
