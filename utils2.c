@@ -33,7 +33,7 @@ int	is_sorted(t_stack *s)
 
 /* Checks if the stack is ordered correctly i.e. only needs to be rotated to
 * become sorted */
-int is_ordered(t_stack *s)
+int	is_ordered(t_stack *s)
 {
 	size_t	i;
 	int		n;
@@ -61,7 +61,7 @@ int is_ordered(t_stack *s)
 	return (0);
 }
 
-t_list **rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot)
+t_list	**rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot)
 {
 	t_list	**new_cmds;
 

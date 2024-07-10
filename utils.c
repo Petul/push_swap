@@ -18,7 +18,7 @@
 /* Frees a null terminated array */
 void	free_array(void **arr)
 {
-	int i;
+	int	i;
 
 	if (!arr)
 		return ;
@@ -34,21 +34,21 @@ void	free_array(void **arr)
 
 /* Checks if the str is composed of only digits and spaces*/
 int	str_is_digit_and_space(char *str)
- {
+{
 	if (!str)
- 		return (0);
- 	while (*str)
- 	{
- 		if (!ft_isdigit(*str) && !ft_strchr(" -", *str))
- 			return (0);
- 		str++;
- 	}
- 	return (1);
- }
+		return (0);
+	while (*str)
+	{
+		if (!ft_isdigit(*str) && !ft_strchr(" -", *str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
 
 void	write_cmd(void *content)
 {
-	t_cmd *c;
+	t_cmd	*c;
 
 	c = (t_cmd *)content;
 	if (*c == SA)

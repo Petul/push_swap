@@ -66,7 +66,6 @@ t_stack		*create_stack(size_t size, size_t len, int *num_array);
 void		delete_stack(t_stack *stack);
 void		print_stack(t_stack *stack);
 void		stack_swap(t_stack *stack);
-void		stack_rev_rot(t_stack *stack);
 void		stack_rev_rot_n(t_stack *s, size_t n);
 void		stack_rot_n(t_stack *s, size_t n);
 void		stack_push_n(t_stack *target, t_stack *source, size_t n);

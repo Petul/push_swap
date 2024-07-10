@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:27:46 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/08 13:09:59 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:42:52 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,42 @@
 * Rotates the stack.
 * The first element becomes the last
 */
-void stack_rot(t_stack *stack)
+void	stack_rot_n(t_stack *stack, size_t n)
 {
+	size_t i;
 	int	first;
 
-	if (stack->len < 2)
-		return ;
-	first = stack->arr[0];
-	ft_memmove(stack->arr, stack->arr + 1, (stack->len - 1) * sizeof(int));
-	stack->arr[stack->len - 1] = first;
-	return ;
+	i = 0;
+	while (i < n)
+	{
+		if (stack->len < 2)
+			return ;
+		first = stack->arr[0];
+		ft_memmove(stack->arr, stack->arr + 1, (stack->len - 1) * sizeof(int));
+		stack->arr[stack->len - 1] = first;
+		i++;
+	}
 }
 
 /*
 * Reverse rotates the stack.
 * The last element becomes the first
 */
-void stack_rev_rot(t_stack *stack)
+void	stack_rev_rot_n(t_stack *stack, size_t n)
 {
-	int	last;
-
-	if (stack->len < 2)
-		return ;
-	last = stack->arr[stack->len - 1];
-	ft_memmove(stack->arr + 1, stack->arr, (stack->len - 1) * sizeof(int));
-	stack->arr[0] = last;
-	return ;
+	size_t	i;
+	int		last;
+	
+	i = 0;
+	while (i < n)
+	{
+		if (stack->len < 2)
+			return ;
+		last = stack->arr[stack->len - 1];
+		ft_memmove(stack->arr + 1, stack->arr, (stack->len - 1) * sizeof(int));
+		stack->arr[0] = last;
+		i++;
+	}
 }
 
 /*
