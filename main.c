@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:23:18 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/03 14:35:53 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:45:43 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_args(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		if (!str_is_digit_and_space(av[i]))
+		if (!str_is_valid(av[i]))
 			return (0);
 		i++;
 	}
@@ -32,7 +32,7 @@ static int	check_args(int ac, char **av)
 
 static void	error_exit(void)
 {
-	ft_printf("Error\n");
+	ft_dprintf(2, "Error\n");
 	exit(1);
 }
 

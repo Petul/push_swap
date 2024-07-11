@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:01:02 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 19:28:10 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:45:05 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,24 @@ void	free_array(void **arr)
 	return ;
 }
 
-/* Checks if the str is composed of only digits and spaces*/
-int	str_is_digit_and_space(char *str)
+/* Checks if the str is composed of only valid sequenecs*/
+int	str_is_valid(char *str)
 {
+	size_t	i;
+
 	if (!str)
 		return (0);
-	while (*str)
+	i = 0;
+	while (str[i])
 	{
-		if (!ft_isdigit(*str) && !ft_strchr(" -", *str))
+		if (!ft_isdigit(str[i]) && !ft_strchr(" -", str[i]))
 			return (0);
-		str++;
+		if (i != 0)
+		{
+			if (str[i] == '-' && !ft_isspace(str[i - 1]))
+				return (0);
+		}
+		i++;
 	}
 	return (1);
 }

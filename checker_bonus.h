@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:44:09 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/11 13:40:31 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:50:46 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef enum e_cmd
 int			checker(t_stacks *s);
 t_stacks	*create_stacks(int ac, char **av);
 void		delete_stack(t_stack *stack);
-int			str_is_digit_and_space(char *str);
+int			str_is_valid(char *str);
 t_stack		*create_stack(size_t size, size_t len, int *num_array);
 int			*parse_args(int *nums, int ac, char **av);
 int			overflowed(char *s, int n);
@@ -61,6 +61,5 @@ void		stack_swap(t_stack *stack);
 void		stack_push_n(t_stack *target, t_stack *source, size_t n);
 void		stack_exec_cmds(t_stacks *s, t_list *cmd_lst);
 int			append_cmd_to_cmds(t_cmd cmd, t_list **cmds, size_t n);
-
 
 #endif
