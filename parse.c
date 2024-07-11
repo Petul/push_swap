@@ -73,7 +73,6 @@ static int	*char_arr_to_int_arr(int *nums, char *c_arr)
 	int		*i_arr;
 	char	**s_arr;
 
-	*nums = count_nums(c_arr);
 	i_arr = ft_calloc(*nums, sizeof(int));
 	if (!i_arr)
 		return (NULL);
@@ -103,6 +102,12 @@ int	*parse_args(int *nums, int ac, char **av)
 	arr = join_args(ac, av);
 	if (!arr)
 		return (NULL);
+	*nums = count_nums(arr);
+	if (*nums == 0)
+	{
+		free(arr);
+		return (NULL);
+	}
 	i_arr = char_arr_to_int_arr(nums, arr);
 	free(arr);
 	if (!i_arr)

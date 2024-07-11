@@ -47,7 +47,9 @@ int	main(int argc, char **argv)
 {
 	t_stacks	*s;
 
-	if (argc < 2 || !check_args(argc, argv))
+	if (argc < 2)
+		return (0);
+	if (!check_args(argc, argv))
 		error_exit();
 	s = create_stacks(argc - 1, &argv[1]);
 	if (!s)
