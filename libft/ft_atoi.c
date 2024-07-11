@@ -6,19 +6,10 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:19:39 by pleander          #+#    #+#             */
-/*   Updated: 2024/04/24 15:49:38 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:44:13 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "include/libft.h"
-
-static int	ft_isspace(int c)
-{
-	if (c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f'
-		|| c == '\r' || c == ' ')
-		return (1);
-	return (0);
-}
 
 int	ft_atoi(const char *str)
 {
