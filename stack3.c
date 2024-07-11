@@ -6,11 +6,12 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:53:50 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/10 16:03:58 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:32:14 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft/include/libft.h"
 #include "push_swap.h"
 
 static void	stack_rot2(t_stack *a, t_stack *b)
@@ -53,21 +54,27 @@ void	stack_exec_cmds(t_stacks *s, t_list *cmd_lst)
 	}
 }
 
-int	append_cmd_to_cmds(t_cmd cmd, t_list **cmds)
+int	append_cmd_to_cmds(t_cmd cmd, t_list **cmds, size_t n)
 {
 	t_cmd	*cmd_ptr;
 	t_list	*new;
+	size_t	i;
 
-	cmd_ptr = malloc(sizeof(t_cmd));
-	if (!cmd_ptr)
-		return (-1);
-	*cmd_ptr = cmd;
-	new = ft_lstnew(cmd_ptr);
-	if (!new)
+	i = 0;
+	while (i < n)
 	{
-		free(cmd_ptr);
-		return (-1);
+		cmd_ptr = malloc(sizeof(t_cmd));
+		if (!cmd_ptr)
+			return (-1);
+		*cmd_ptr = cmd;
+		new = ft_lstnew(cmd_ptr);
+		if (!new)
+		{
+			free(cmd_ptr);
+			return (-1);
+		}
+		ft_lstadd_back(cmds, new);
+		i++;
 	}
-	ft_lstadd_back(cmds, new);
 	return (0);
 }

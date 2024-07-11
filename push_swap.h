@@ -6,39 +6,28 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:43:42 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/10 16:02:56 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:54:20 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <stddef.h>
 # include "libft/include/libft.h"
 
-# define RR_DIST(a, b) min(a, b) + (a - min(a,b)) + (b - min(a,b))
-# define FIRST_A s->a->arr[0]
-# define FIRST_B s->b->arr[0]
-# define FIRST_S s->arr[0]
-# define LAST_A s->a->arr[s->a->len - 1]
-# define LAST_B s->b->arr[s->b->len - 1]
-# define LAST_S s->arr[s->len - 1]
-# define A(i) s->a->arr[i]
-# define B(i) s->b->arr[i]
-# define S(i) s->arr[i]
-
 typedef struct s_stack
 {
-	int *arr;
-	size_t size;
-	size_t len;
+	int		*arr;
+	size_t	size;
+	size_t	len;
 
 }	t_stack;
 
 typedef struct s_stacks
 {
-	t_stack *a;
-	t_stack *b;
+	t_stack	*a;
+	t_stack	*b;
 }	t_stacks;
 
 typedef enum e_cmd
@@ -55,6 +44,16 @@ typedef enum e_cmd
 	RRB,
 	RRR
 }	t_cmd;
+
+typedef struct s_rrp_config
+{
+	int		rot1;
+	int		rot2;
+	size_t	a_size;
+	size_t	b_size;
+	size_t	rots[3];
+	t_cmd	cmds[3];
+}	t_rrp_config;
 
 int			push_swap(t_stacks *s);
 int			*parse_args(int *nums, int ac, char **av);
@@ -77,12 +76,16 @@ t_list		**construct_n_cmd(t_cmd cmd, size_t n);
 int			is_sorted(t_stack *s);
 int			is_ordered(t_stack *s);
 t_list		**rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot);
-//t_list		**sort_in_place(t_stacks *s, t_list **cmds);
-int			append_cmd_to_cmds(t_cmd cmd, t_list **cmds);
+int			append_cmd_to_cmds(t_cmd cmd, t_list **cmds, size_t n);
 int			stack_get_max(t_stack *s);
 int			stack_get_min(t_stack *s);
 int			is_unique(int *i_arr, int nums);
 int			overflowed(char *s, int n);
+size_t		rr_dist(size_t a, size_t b);
+size_t		min(size_t a, size_t b);
+void		construct_rrp_config(t_rrp_config *c);
+size_t		*get_dists_to_top(t_stacks *s, size_t i_a, size_t i_b);
+int			rotate_a_min_on_top(t_stacks *s, t_list **cmd_list);
+int			rotate_b_max_on_top(t_stacks *s, t_list **cmd_list);
 
 #endif
-

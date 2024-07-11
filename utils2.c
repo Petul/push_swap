@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:44:42 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/04 14:49:44 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:52:57 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,14 @@ int	is_ordered(t_stack *s)
 	return (0);
 }
 
-t_list	**rotate_i_to_top(t_stack *s, size_t i, t_cmd rot, t_cmd rev_rot)
+size_t	rr_dist(size_t a, size_t b)
 {
-	t_list	**new_cmds;
+	return (min(a, b) + (a - min(a, b)) + (b - min(a, b)));
+}
 
-	if (i < s->len - i)
-		new_cmds = construct_n_cmd(rot, i);
-	else
-		new_cmds = construct_n_cmd(rev_rot, s->len - i);
-	if (!new_cmds)
-		return (NULL);
-	return (new_cmds);
+size_t	min(size_t a, size_t b)
+{
+	if (a < b)
+		return (a);
+	return (b);
 }

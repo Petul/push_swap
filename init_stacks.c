@@ -18,7 +18,7 @@ static t_stack	*create_stack_a(int ac, char **av)
 {
 	int		n_nums;
 	int		*num_array;
-	t_stack *stack_a;
+	t_stack	*stack_a;
 
 	num_array = parse_args(&n_nums, ac, av);
 	if (!num_array)
@@ -29,10 +29,10 @@ static t_stack	*create_stack_a(int ac, char **av)
 	return (stack_a);
 }
 
-static t_stack *create_stack_b(int n_nums)
+static t_stack	*create_stack_b(int n_nums)
 {
 	int		*num_array;
-	t_stack *stack_b;
+	t_stack	*stack_b;
 
 	num_array = ft_calloc(n_nums, sizeof(int));
 	if (!num_array)
@@ -43,10 +43,10 @@ static t_stack *create_stack_b(int n_nums)
 	return (stack_b);
 }
 
-t_stacks *create_stacks(int ac, char **av)
+t_stacks	*create_stacks(int ac, char **av)
 {
-	t_stacks *s;
-	
+	t_stacks	*s;
+
 	s = ft_calloc(1, sizeof(t_stacks));
 	if (!s)
 		return (NULL);

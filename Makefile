@@ -6,7 +6,7 @@
 #    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 14:36:26 by pleander          #+#    #+#              #
-#    Updated: 2024/07/10 16:04:33 by pleander         ###   ########.fr        #
+#    Updated: 2024/07/11 10:54:56 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,15 @@ CC := cc
 #CFLAGS := -Wall -Wextra -Werror
 CFLAGS := -Wall -Wextra -Werror -g
 CFILES := construct_cmd.c \
+		  construct_rrp_config.c \
 		  init_stacks.c \
 		  main.c \
 		  parse.c \
 		  parse2.c \
 		  push_swap.c \
 		  rev_sort_into_b.c \
+		  rev_sort_into_b2.c \
+		  rotate_to_top.c \
 		  stack.c \
 		  stack2.c \
 		  stack3.c \

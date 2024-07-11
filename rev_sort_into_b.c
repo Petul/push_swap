@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:32:20 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/01 15:33:44 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:49:34 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,22 @@
 #include "libft/include/libft.h"
 #include "push_swap.h"
 
-/* Calculates a cost matrix with costs for different rotation alternatives
- * to reach the desired result. Returns [s_a rot, s_a rev_rot, s_b rot, s_b rev_rot]
+/* Checks if the number is the smallest or greatest in the new set 
+ * and returns the insert index if it is.
  */
-static size_t	*get_dists_to_top(t_stacks *s, size_t i_a, size_t i_b)
-{
-	size_t *dists;
-
-	dists = ft_calloc(4, sizeof(size_t));
-	if (!dists)
-		return (NULL);
-	dists[0] = i_a;
-	dists[1] = s->a->len - i_a;
-	dists[2] = i_b;
-	dists[3] = s->b->len - i_b;
-
-	return (dists);
-}
-
 static int	get_min_max_ind(t_stack *s, int num)
 {
 	int	i;
 
 	i = stack_get_max(s);
-	if (s->len > 0 && num > S(i))
+	if (s->len > 0 && num > s->arr[i])
 	{
 		if (i == 0)
 			return (s->len - 1);
 		return (i);
 	}
 	i = stack_get_min(s);
-	if (s->len > 0 && num < S(i))
+	if (s->len > 0 && num < s->arr[i])
 	{
 		if ((size_t)i == s->len - 1)
 			return (0);
@@ -63,12 +48,12 @@ static int	find_rev_sort_ind(t_stack *s, int num)
 	i = get_min_max_ind(s, num);
 	if (i >= 0)
 		return (i);
-	if (s->len > 0 && num > FIRST_S && num < LAST_S)
+	if (s->len > 0 && num > s->arr[0] && num < s->arr[s->len - 1])
 		return (0);
 	i = 1;
 	while ((size_t)i < s->len)
 	{
-		if (num < S(i - 1) && num > S(i))
+		if (num < s->arr[i - 1] && num > s->arr[i])
 			return (i);
 		i++;
 	}
@@ -83,13 +68,13 @@ static int	find_rev_sort_ind(t_stack *s, int num)
 * 2) Rotation of stack B to put correct location at the top
 * 3) Pushing the element to stack B 
 */
-static t_list **get_cheapest_insert(t_stacks *s, size_t index)
+static t_list	**get_cheapest_insert(t_stacks *s, size_t index)
 {
-	t_list **cmd_list;
+	t_list	**cmd_list;
 	ssize_t	insert_ind;
-	size_t *top_dsts;
+	size_t	*top_dsts;
 
-	insert_ind = find_rev_sort_ind(s->b, s->a->arr[index]); // Find insert index in B
+	insert_ind = find_rev_sort_ind(s->b, s->a->arr[index]);
 	if (insert_ind < 0)
 		return (NULL);
 	top_dsts = get_dists_to_top(s, index, insert_ind);
@@ -98,7 +83,8 @@ static t_list **get_cheapest_insert(t_stacks *s, size_t index)
 	return (cmd_list);
 }
 
-/* Finds the chain of commands for the optimal move for an element from A to B */
+/* Finds the chain of commands for the optimal move for an
+ * element from A to B */
 static int	find_optimal_cmds(t_stacks *s, t_list **optimal)
 {
 	t_list	**new;
@@ -127,6 +113,7 @@ static int	find_optimal_cmds(t_stacks *s, t_list **optimal)
 	return (min_size);
 }
 
+/* Sort the numbers descendingly into the B stack */
 int	rev_sort_into_b(t_stacks *s, t_list **cmd_list)
 {
 	t_list	**optimal;
@@ -145,5 +132,5 @@ int	rev_sort_into_b(t_stacks *s, t_list **cmd_list)
 		*optimal = NULL;
 	}
 	free(optimal);
-	return (1);	
+	return (1);
 }

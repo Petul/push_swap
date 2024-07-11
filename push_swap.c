@@ -6,30 +6,13 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:58:40 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/10 15:49:46 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:55:25 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/include/libft.h"
 #include "push_swap.h"
-
-static int	rotate_b_max_on_top(t_stacks *s, t_list **cmd_list)
-{
-	t_list	**new_cmds;
-	int		max_i;
-
-	max_i = stack_get_max(s->b);
-	if (max_i < 0)
-		return (-1);
-	new_cmds = rotate_i_to_top(s->b, max_i, RB, RRB);
-	if (!new_cmds)
-		return (-1);
-	stack_exec_cmds(s, *new_cmds);
-	ft_lstadd_back(cmd_list, *new_cmds);
-	free(new_cmds);
-	return (1);
-}
 
 /* Pushes everything from B to A checking that it goes in the correct place.
  * It the location is not correct A is reverse rotated. As a consequence of B
@@ -42,8 +25,11 @@ static int	push_all_to_a(t_stacks *s, t_list **cmd_list)
 
 	while (s->b->len > 0)
 	{
-		if ((FIRST_B < FIRST_A && FIRST_B > LAST_A)
-			|| ((FIRST_A < LAST_A) && (FIRST_B > LAST_A || FIRST_B < FIRST_A)))
+		if ((s->b->arr[0] < s->a->arr[0]
+				&& s->b->arr[0] > s->a->arr[s->a->len - 1])
+			|| ((s->a->arr[0] < s->a->arr[s->a->len - 1])
+				&& (s->b->arr[0] > s->a->arr[s->a->len - 1]
+					|| s->b->arr[0] < s->a->arr[0])))
 			new_cmds = construct_n_cmd(PA, 1);
 		else
 			new_cmds = construct_n_cmd(RRA, 1);
@@ -56,28 +42,11 @@ static int	push_all_to_a(t_stacks *s, t_list **cmd_list)
 	return (1);
 }
 
-static int	rotate_a_min_on_top(t_stacks *s, t_list **cmd_list)
-{
-	t_list	**new_cmds;
-	int		min_i;
-
-	min_i = stack_get_min(s->a);
-	if (min_i < 0)
-		return (-1);
-	new_cmds = rotate_i_to_top(s->a, min_i, RA, RRA);
-	if (!new_cmds)
-		return (-1);
-	stack_exec_cmds(s, *new_cmds);
-	ft_lstadd_back(cmd_list, *new_cmds);
-	free(new_cmds);
-	return (1);
-}
-
 static int	sort_three(t_stacks *s, t_list **cmds)
 {
 	if (!is_ordered(s->a))
 	{
-		append_cmd_to_cmds(SA, cmds);
+		append_cmd_to_cmds(SA, cmds, 1);
 		stack_swap(s->a);
 	}
 	if (rotate_a_min_on_top(s, cmds) < 0)
