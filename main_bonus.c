@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 11:42:49 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/11 11:56:42 by pleander         ###   ########.fr       */
+/*   Created: 2024/07/11 14:22:32 by pleander          #+#    #+#             */
+/*   Updated: 2024/07/11 14:22:33 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	main(int argc, char **argv)
 	s = create_stacks(argc - 1, &argv[1]);
 	if (!s)
 		error_exit();
-	// if (push_swap(s) < 0)
-	// {
-	// 	free_stacks(s);
-	// 	error_exit();
-	// }
+	if (checker(s) < 0)
+	{
+		free_stacks(s);
+		error_exit();
+	}
 	free_stacks(s);
 	return (0);
 }

@@ -32,8 +32,10 @@ CFILES := construct_cmd.c \
 		  utils2.c
 
 BONUS_CFILES := main_bonus.c \
+				checker_bonus.c \
 				init_stacks_bonus.c \
 				stack_bonus.c \
+				stack2_bonus.c \
 				utils_bonus.c \
 				parse_bonus.c \
 				parse2_bonus.c

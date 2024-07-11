@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   stack_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:42:06 by pleander          #+#    #+#             */
-/*   Updated: 2024/07/10 15:59:50 by pleander         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:41:48 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/ft_printf.h"
 #include "libft/include/libft.h"
 #include "push_swap.h"
 
@@ -35,22 +34,6 @@ void	delete_stack(t_stack *stack)
 	free(stack->arr);
 	free(stack);
 	return ;
-}
-
-void	print_stack(t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < (int)stack->size)
-	{
-		if (i < (int)stack->len)
-			ft_printf("%d: %d\n", i, stack->arr[i]);
-		else
-			ft_printf("%d: -\n", i);
-		i++;
-	}
-	ft_printf("\n");
 }
 
 /* 
@@ -87,6 +70,27 @@ void	stack_push_n(t_stack *target, t_stack *source, size_t n)
 		target->arr[0] = source->arr[0];
 		source->len--;
 		ft_memmove(source->arr, source->arr + 1, source->len * sizeof(int));
+		i++;
+	}
+}
+
+/*
+* Rotates the stack.
+* The first element becomes the last
+*/
+void	stack_rot_n(t_stack *stack, size_t n)
+{
+	size_t	i;
+	int		first;
+
+	i = 0;
+	while (i < n)
+	{
+		if (stack->len < 2)
+			return ;
+		first = stack->arr[0];
+		ft_memmove(stack->arr, stack->arr + 1, (stack->len - 1) * sizeof(int));
+		stack->arr[stack->len - 1] = first;
 		i++;
 	}
 }
