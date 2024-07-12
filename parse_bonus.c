@@ -12,7 +12,6 @@
 
 #include <stdlib.h>
 #include "libft/include/ft_printf.h"
-#include "libft/include/libft.h"
 #include "checker_bonus.h"
 
 static char	*free_args_and_return_null(void *a1, void *a2)

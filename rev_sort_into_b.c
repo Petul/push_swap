@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/libft.h"
 #include "push_swap.h"
 
 /* Checks if the number is the smallest or greatest in the new set 

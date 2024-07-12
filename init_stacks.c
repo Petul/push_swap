@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/libft.h"
 #include "push_swap.h"
 
 static t_stack	*create_stack_a(int ac, char **av)

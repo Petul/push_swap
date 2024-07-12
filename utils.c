@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/libft.h"
 #include "libft/include/ft_printf.h"
 #include "push_swap.h"
 

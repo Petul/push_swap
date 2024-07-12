@@ -12,7 +12,6 @@
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "libft/include/libft.h"
 #include "libft/include/get_next_line.h"
 #include "libft/include/ft_printf.h"
 #include "checker_bonus.h"

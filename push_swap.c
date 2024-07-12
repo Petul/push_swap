@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/libft.h"
 #include "push_swap.h"
 
 /* Pushes everything from B to A checking that it goes in the correct place.

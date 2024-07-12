@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/include/libft.h"
 #include "push_swap.h"
 
 static void	stack_rot2(t_stack *a, t_stack *b)
