@@ -56,7 +56,6 @@ static size_t	calculate_index_of_shortest_insert(size_t *top_dsts)
 
 	shortest[0] = 0;
 	shortest[1] = rr_dist(top_dsts[0], top_dsts[2]);
-	shortest[1] = rr_dist(top_dsts[0], top_dsts[2]);
 	if (top_dsts[0] + top_dsts[3] < shortest[1])
 	{
 		shortest[0] = 1;

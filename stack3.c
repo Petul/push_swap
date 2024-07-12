@@ -54,12 +54,28 @@ void	stack_exec_cmds(t_stacks *s, t_list *cmd_lst)
 	}
 }
 
+static void	do_appending(t_list **last, t_list **cmds, t_list *new)
+{
+	if (!(*last))
+	{
+		ft_lstadd_back(cmds, new);
+		*last = new;
+	}
+	else
+	{
+		ft_lstadd_back(last, new);
+		*last = new;
+	}
+}
+
 int	append_cmd_to_cmds(t_cmd cmd, t_list **cmds, size_t n)
 {
 	t_cmd	*cmd_ptr;
+	t_list	*last;
 	t_list	*new;
 	size_t	i;
 
+	last = NULL;
 	i = 0;
 	while (i < n)
 	{
@@ -73,7 +89,7 @@ int	append_cmd_to_cmds(t_cmd cmd, t_list **cmds, size_t n)
 			free(cmd_ptr);
 			return (-1);
 		}
-		ft_lstadd_back(cmds, new);
+		do_appending(&last, cmds, new);
 		i++;
 	}
 	return (0);
