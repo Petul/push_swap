@@ -37,22 +37,6 @@ void	delete_stack(t_stack *stack)
 	return ;
 }
 
-void	print_stack(t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < (int)stack->size)
-	{
-		if (i < (int)stack->len)
-			ft_printf("%d: %d\n", i, stack->arr[i]);
-		else
-			ft_printf("%d: -\n", i);
-		i++;
-	}
-	ft_printf("\n");
-}
-
 /* 
 * Swaps first to elements at top of the stack.
 * Do nothing if there is one or less elements 
