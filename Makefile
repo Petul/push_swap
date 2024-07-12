@@ -13,8 +13,7 @@
 NAME := push_swap
 BONUS_NAME := checker
 CC := cc
-#CFLAGS := -Wall -Wextra -Werror
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror
 CFILES := construct_cmd.c \
 		  construct_rrp_config.c \
 		  init_stacks.c \

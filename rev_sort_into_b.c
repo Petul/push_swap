@@ -23,11 +23,7 @@ static int	get_min_max_ind(t_stack *s, int num)
 
 	i = stack_get_max(s);
 	if (s->len > 0 && num > s->arr[i])
-	{
-		if (i == 0)
-			return (s->len - 1);
 		return (i);
-	}
 	i = stack_get_min(s);
 	if (s->len > 0 && num < s->arr[i])
 	{
