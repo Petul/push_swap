@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include "libft/include/ft_printf.h"
+#include "libft/include/libft.h"
 #include "push_swap.h"
 
 /* Frees a null terminated array */
@@ -43,11 +44,10 @@ int	str_is_valid(char *str)
 	{
 		if (!ft_isdigit(str[i]) && !ft_strchr(" -", str[i]))
 			return (0);
-		if (i != 0)
-		{
-			if (str[i] == '-' && !ft_isspace(str[i - 1]))
-				return (0);
-		}
+		if (str[i] == '-'
+			&& ((i != 0 && !ft_isspace(str[i - 1]))
+			|| !ft_isdigit(str[i + 1])))
+			return (0);
 		i++;
 	}
 	return (1);
