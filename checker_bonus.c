@@ -89,7 +89,7 @@ int	checker(t_stacks *s)
 	stack_exec_cmds(s, *cmd_lst);
 	ft_lstclear(cmd_lst, &free);
 	free(cmd_lst);
-	if (is_sorted(s->a))
+	if (is_sorted(s->a) && s->b->len == 0)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
